@@ -1,0 +1,6 @@
+{
+  "name": "Utsav AI",
+  "description": "An editorial AI-powered event and wedding planner featuring Shubh, your intelligent planning assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

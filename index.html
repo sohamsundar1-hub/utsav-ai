@@ -1,0 +1,4848 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utsav AI — AI-Powered Event &amp; Wedding Planner</title>
+    <meta
+      name="description"
+      content="Plan your perfect wedding or milestone event with Shubh, your intelligent AI planner. Smart timelines, vendor matchmaking, RSVP tracking, and instant replanning."
+    />
+    <meta property="og:title" content="Utsav AI — AI-Powered Event &amp; Wedding Planner" />
+    <meta
+      property="og:description"
+      content="Enter your budget, guests and date. Shubh, your AI planner, handles the rest."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================================
+         UTSAV AI — EDITORIAL DESIGN SYSTEM
+         Palette: Warm Alabaster Canvas (60%), Soft Stone / Charcoal Surfaces (30%),
+                  Dusty Rose Accent (10%)
+         Typography: Outfit (Display), Plus Jakarta Sans (Body/Utility),
+                     JetBrains Mono (Tabular Metrics)
+         ===================================================================== */
+      :root {
+        --bg-canvas: #faf7f5;
+        --bg-surface: #ffffff;
+        --bg-stone: #f2ece9;
+        --bg-charcoal: #181516;
+        --bg-charcoal-elevated: #231f20;
+
+        --text-ink: #1c191a;
+        --text-muted: #5d5356;
+        --text-on-dark: #faf7f5;
+        --text-on-dark-muted: #bfb4b7;
+
+        --rose-accent: #9a5e61;
+        --rose-accent-hover: #7e474a;
+        --rose-soft: #d9a7a9;
+        --rose-tint: #f5ebeb;
+
+        --border-hairline: rgba(28, 25, 26, 0.11);
+        --border-hairline-dark: rgba(250, 247, 245, 0.12);
+        --border-dashed-rose: rgba(154, 94, 97, 0.48);
+
+        --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+        --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+        --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 14px;
+        --radius-full: 9999px;
+
+        --container-max: 1240px;
+        --sidebar-width: 256px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: var(--bg-canvas);
+        color: var(--text-ink);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-color: var(--bg-canvas);
+        color: var(--text-ink);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      button,
+      a,
+      select,
+      input {
+        font-family: inherit;
+      }
+
+      button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--rose-accent);
+        outline-offset: 3px;
+      }
+
+      .tabular-nums {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--container-max);
+        margin-inline: auto;
+        padding-inline: 24px;
+      }
+
+      /* View Switching */
+      .view-hidden {
+        display: none !important;
+      }
+
+      /* Shared Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 26px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition:
+          background-color 180ms var(--ease-editorial),
+          color 180ms var(--ease-editorial),
+          border-color 180ms var(--ease-editorial),
+          transform 180ms var(--ease-editorial);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background-color: var(--rose-accent);
+        color: #ffffff;
+        border: 1px solid var(--rose-accent);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--rose-accent-hover);
+        border-color: var(--rose-accent-hover);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--text-ink);
+        border: 1px solid var(--border-hairline);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--text-ink);
+        background-color: rgba(28, 25, 26, 0.04);
+      }
+
+      .btn-light {
+        background-color: var(--bg-canvas);
+        color: var(--text-ink);
+        border: 1px solid var(--bg-canvas);
+      }
+
+      .btn-light:hover {
+        background-color: var(--rose-tint);
+        border-color: var(--rose-tint);
+      }
+
+      .btn-sm {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+
+      /* Scroll Reveal Animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 680ms var(--ease-editorial),
+          transform 680ms var(--ease-editorial);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Grayscale-to-Color Editorial Media Transition */
+      .editorial-frame {
+        position: relative;
+        overflow: hidden;
+        background-color: var(--bg-stone);
+        border-radius: var(--radius-md);
+      }
+
+      .editorial-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(1.05);
+        transform: scale(1.01);
+        transition:
+          filter 600ms var(--ease-editorial),
+          transform 700ms var(--ease-editorial);
+      }
+
+      .hero-frame-main img {
+        filter: grayscale(55%) contrast(1.04);
+      }
+
+      .editorial-frame:hover img,
+      .testimonial-card:hover .editorial-frame img,
+      .interlude-grid:hover .interlude-frame img {
+        filter: grayscale(0%) contrast(1);
+        transform: scale(1.03);
+      }
+
+      .img-fallback {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 24px;
+        text-align: center;
+        background: linear-gradient(135deg, #efe7e5 0%, #e5d8d6 100%);
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      .editorial-frame.img-errored img {
+        display: none;
+      }
+
+      .editorial-frame.img-errored .img-fallback {
+        display: flex;
+      }
+
+      /* =====================================================================
+         VIEW 1 — LANDING PAGE
+         ===================================================================== */
+
+      /* Sticky Glassmorphism Navbar (Strict 3-Zone Top Bar Contract) */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background-color: rgba(250, 247, 245, 0.78);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-hairline);
+        transition: background-color 220ms ease;
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        height: 68px;
+      }
+
+      .brand-wordmark {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-ink);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .header-nav a {
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding-block: 4px;
+        transition: color 160ms ease;
+      }
+
+      .header-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--rose-accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms var(--ease-editorial);
+      }
+
+      .header-nav a:hover {
+        color: var(--text-ink);
+      }
+
+      .header-nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-sm);
+      }
+
+      .mobile-drawer {
+        display: none;
+        padding: 16px 24px 20px;
+        border-top: 1px solid var(--border-hairline);
+        background-color: rgba(250, 247, 245, 0.96);
+      }
+
+      .mobile-drawer.is-open {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .mobile-drawer a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-ink);
+        padding-block: 4px;
+      }
+
+      /* Full-Viewport Editorial Hero */
+      .hero-section {
+        min-height: calc(100vh - 68px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 48px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 48px;
+        align-items: stretch;
+        flex: 1;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-block: 16px;
+      }
+
+      .hero-kicker {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--rose-accent);
+        margin-bottom: 18px;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.75rem, 5.1vw, 4.65rem);
+        font-weight: 800;
+        line-height: 1.01;
+        letter-spacing: -0.035em;
+        color: var(--text-ink);
+        text-wrap: balance;
+        margin-bottom: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+        line-height: 1.65;
+        color: var(--text-muted);
+        max-width: 50ch;
+        margin-bottom: 34px;
+      }
+
+      .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 44px;
+      }
+
+      .hero-meta-strip {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-hairline);
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .hero-meta-strip strong {
+        color: var(--text-ink);
+        font-weight: 600;
+      }
+
+      /* Staggered Editorial Diptych in Hero */
+      .hero-visuals {
+        display: grid;
+        grid-template-columns: 1fr 0.68fr;
+        gap: 18px;
+        align-items: stretch;
+        min-height: 460px;
+      }
+
+      .hero-frame-main {
+        height: 100%;
+        min-height: 420px;
+      }
+
+      .hero-frame-side {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        padding-top: 40px;
+      }
+
+      .hero-frame-portrait {
+        flex: 1;
+        min-height: 290px;
+      }
+
+      .hero-caption {
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border-hairline);
+        padding-top: 12px;
+      }
+
+      .hero-caption strong {
+        display: block;
+        color: var(--text-ink);
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      /* Section Header Pattern */
+      .section-pad {
+        padding-block: 96px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        margin-bottom: 56px;
+      }
+
+      .section-kicker {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--rose-accent);
+        margin-bottom: 10px;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.6vw, 3rem);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        color: var(--text-ink);
+        text-wrap: balance;
+        max-width: 20ch;
+      }
+
+      .section-desc {
+        font-size: 15px;
+        color: var(--text-muted);
+        max-width: 42ch;
+      }
+
+      /* 6 Feature Cards — Staggered Editorial Grid */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .feature-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition:
+          transform 240ms var(--ease-editorial),
+          border-color 240ms var(--ease-editorial);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--rose-accent);
+      }
+
+      /* Staggered offsets on desktop */
+      .feature-card:nth-child(2),
+      .feature-card:nth-child(5) {
+        margin-top: 32px;
+      }
+
+      .feature-card:nth-child(3),
+      .feature-card:nth-child(6) {
+        margin-top: 64px;
+      }
+
+      .feature-num {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--rose-accent);
+      }
+
+      .feature-title {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-ink);
+      }
+
+      .feature-text {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--text-muted);
+      }
+
+      .feature-meta {
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid var(--border-hairline);
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Editorial Interlude Banner with Grayscale-to-Color Image */
+      .interlude-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 48px;
+        align-items: center;
+        margin-top: 96px;
+        padding-top: 64px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .interlude-frame {
+        aspect-ratio: 4 / 3;
+      }
+
+      .interlude-copy h3 {
+        font-family: var(--font-display);
+        font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        text-wrap: balance;
+      }
+
+      .interlude-copy p {
+        font-size: 15px;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+        max-width: 46ch;
+      }
+
+      /* 4-Step How-It-Works Strip (Dark Charcoal Editorial Band) */
+      .how-band {
+        background-color: var(--bg-charcoal);
+        color: var(--text-on-dark);
+        padding-block: 96px;
+      }
+
+      .how-band .section-kicker {
+        color: var(--rose-soft);
+      }
+
+      .how-band .section-title {
+        color: var(--text-on-dark);
+      }
+
+      .how-band .section-desc {
+        color: var(--text-on-dark-muted);
+      }
+
+      .how-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--border-hairline-dark);
+        border-bottom: 1px solid var(--border-hairline-dark);
+      }
+
+      .how-step {
+        padding: 36px 28px 36px 0;
+        border-right: 1px solid var(--border-hairline-dark);
+        padding-left: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition: background-color 220ms ease;
+      }
+
+      .how-step:first-child {
+        padding-left: 0;
+      }
+
+      .how-step:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      .how-step:hover {
+        background-color: rgba(255, 255, 255, 0.025);
+      }
+
+      .how-index {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--rose-soft);
+      }
+
+      .how-title {
+        font-family: var(--font-display);
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-on-dark);
+      }
+
+      .how-desc {
+        font-size: 14px;
+        line-height: 1.65;
+        color: var(--text-on-dark-muted);
+      }
+
+      /* Event-Type Interactive Selector Chips */
+      .event-types-wrap {
+        margin-top: 64px;
+        padding-top: 48px;
+        border-top: 1px solid var(--border-hairline-dark);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .event-types-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .event-types-label {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-on-dark);
+      }
+
+      .event-types-brief {
+        font-size: 14px;
+        color: var(--rose-soft);
+      }
+
+      .event-chips-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .event-chip {
+        padding: 11px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-hairline-dark);
+        color: var(--text-on-dark-muted);
+        background-color: var(--bg-charcoal-elevated);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition:
+          background-color 180ms var(--ease-editorial),
+          color 180ms var(--ease-editorial),
+          border-color 180ms var(--ease-editorial);
+      }
+
+      .event-chip:hover {
+        color: var(--text-on-dark);
+        border-color: rgba(217, 167, 169, 0.55);
+      }
+
+      .event-chip.is-active {
+        background-color: var(--rose-accent);
+        border-color: var(--rose-accent);
+        color: #ffffff;
+      }
+
+      /* 3-Tier Pricing */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .pricing-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        padding: 34px;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 220ms var(--ease-editorial),
+          border-color 220ms var(--ease-editorial);
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(28, 25, 26, 0.3);
+      }
+
+      .pricing-card.is-featured {
+        background-color: var(--bg-charcoal);
+        color: var(--text-on-dark);
+        border-color: var(--bg-charcoal);
+      }
+
+      .pricing-tier-name {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .pricing-audience {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .pricing-card.is-featured .pricing-audience {
+        color: var(--text-on-dark-muted);
+      }
+
+      .pricing-price {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-block: 26px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .pricing-card.is-featured .pricing-price {
+        border-bottom-color: var(--border-hairline-dark);
+      }
+
+      .pricing-amount {
+        font-family: var(--font-display);
+        font-size: 40px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .pricing-cadence {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .pricing-card.is-featured .pricing-cadence {
+        color: var(--text-on-dark-muted);
+      }
+
+      .pricing-specs {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+        flex: 1;
+      }
+
+      .pricing-specs li {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(28, 25, 26, 0.06);
+      }
+
+      .pricing-card.is-featured .pricing-specs li {
+        border-bottom-color: rgba(250, 247, 245, 0.08);
+      }
+
+      .pricing-spec-label {
+        color: var(--text-muted);
+      }
+
+      .pricing-card.is-featured .pricing-spec-label {
+        color: var(--text-on-dark-muted);
+      }
+
+      .pricing-spec-val {
+        font-weight: 600;
+        text-align: right;
+      }
+
+      /* 3 Testimonial Cards */
+      .testimonials-section {
+        background-color: var(--bg-stone);
+        border-top: 1px solid var(--border-hairline);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .testimonial-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        transition:
+          transform 220ms var(--ease-editorial),
+          border-color 220ms var(--ease-editorial);
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--rose-accent);
+      }
+
+      .testimonial-card:nth-child(2) {
+        margin-top: 28px;
+      }
+
+      .testimonial-quote {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--text-ink);
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .testimonial-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+      }
+
+      .testimonial-name {
+        font-family: var(--font-display);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-ink);
+      }
+
+      .testimonial-role {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* CTA Banner */
+      .cta-banner-section {
+        padding-block: 96px;
+      }
+
+      .cta-banner {
+        background-color: var(--bg-charcoal);
+        color: var(--text-on-dark);
+        border-radius: var(--radius-lg);
+        padding: 64px 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .cta-banner-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.4vw, 2.9rem);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+        max-width: 18ch;
+        margin-bottom: 14px;
+      }
+
+      .cta-banner-sub {
+        font-size: 15px;
+        color: var(--text-on-dark-muted);
+        max-width: 44ch;
+      }
+
+      /* 4-Column Footer */
+      .site-footer {
+        border-top: 1px solid var(--border-hairline);
+        background-color: var(--bg-canvas);
+        padding-block: 64px 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .footer-brand-desc {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-top: 14px;
+        max-width: 32ch;
+      }
+
+      .footer-col-title {
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-ink);
+        margin-bottom: 16px;
+      }
+
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-links a,
+      .footer-links button {
+        font-size: 14px;
+        color: var(--text-muted);
+        text-align: left;
+        transition: color 160ms ease;
+      }
+
+      .footer-links a:hover,
+      .footer-links button:hover {
+        color: var(--rose-accent);
+      }
+
+      .footer-bottom {
+        padding-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      /* =====================================================================
+         VIEW 2 — APP SHELL
+         ===================================================================== */
+      .app-shell {
+        display: flex;
+        min-height: 100vh;
+        background-color: var(--bg-canvas);
+      }
+
+      /* Left Sidebar */
+      .app-sidebar {
+        width: var(--sidebar-width);
+        flex-shrink: 0;
+        background-color: var(--bg-charcoal);
+        color: var(--text-on-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px 16px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        border-right: 1px solid var(--border-hairline-dark);
+      }
+
+      .sidebar-brand-row {
+        padding-inline: 10px;
+        padding-bottom: 24px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--border-hairline-dark);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .sidebar-wordmark {
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-on-dark);
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .sidebar-tab {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-on-dark-muted);
+        white-space: nowrap;
+        text-align: left;
+        transition:
+          background-color 160ms ease,
+          color 160ms ease;
+      }
+
+      .sidebar-tab svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-tab:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+        color: var(--text-on-dark);
+      }
+
+      .sidebar-tab.is-active {
+        background-color: var(--rose-accent);
+        color: #ffffff;
+      }
+
+      .sidebar-footer {
+        padding-top: 16px;
+        border-top: 1px solid var(--border-hairline-dark);
+      }
+
+      .back-landing-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-on-dark-muted);
+        transition:
+          background-color 160ms ease,
+          color 160ms ease;
+      }
+
+      .back-landing-btn:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+        color: var(--text-on-dark);
+      }
+
+      /* App Main Content Column */
+      .app-main {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* App Top Bar */
+      .app-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        height: 68px;
+        padding-inline: 32px;
+        background-color: rgba(250, 247, 245, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border-hairline);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .topbar-event-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .event-switcher {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-ink);
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        padding: 6px 10px 6px 2px;
+        cursor: pointer;
+        max-width: 360px;
+        text-overflow: ellipsis;
+      }
+
+      .event-switcher:hover {
+        border-color: var(--border-hairline);
+        padding-left: 10px;
+      }
+
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+      }
+
+      .countdown-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: var(--radius-full);
+        background-color: var(--rose-tint);
+        border: 1px solid rgba(154, 94, 97, 0.35);
+        color: var(--rose-accent-hover);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .bell-wrap {
+        position: relative;
+      }
+
+      .bell-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-hairline);
+        background-color: var(--bg-surface);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: border-color 160ms ease, background-color 160ms ease;
+      }
+
+      .bell-btn:hover {
+        border-color: var(--rose-accent);
+        background-color: var(--rose-tint);
+      }
+
+      .bell-count {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 15px;
+        height: 15px;
+        border-radius: var(--radius-full);
+        background-color: var(--rose-accent);
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        line-height: 15px;
+        text-align: center;
+      }
+
+      .reminders-popover {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 320px;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        box-shadow: 0 18px 40px rgba(28, 25, 26, 0.12);
+        padding: 18px;
+        z-index: 50;
+      }
+
+      .reminders-popover.is-hidden {
+        display: none;
+      }
+
+      .reminders-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--border-hairline);
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .reminder-item {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        padding-block: 10px;
+        border-bottom: 1px solid rgba(28, 25, 26, 0.06);
+        font-size: 13px;
+      }
+
+      .reminder-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .reminder-meta {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .reminder-dismiss {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--rose-accent);
+        padding: 4px 8px;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+
+      .reminder-dismiss:hover {
+        background-color: var(--rose-tint);
+      }
+
+      /* App Tab Panels */
+      .app-workspace {
+        padding: 36px 32px 64px;
+        max-width: 1160px;
+        width: 100%;
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel.is-active {
+        display: block;
+        animation: panelFade 220ms var(--ease-editorial);
+      }
+
+      @keyframes panelFade {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .panel-heading {
+        font-family: var(--font-display);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-ink);
+      }
+
+      .panel-sub {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      /* Staggered / Architectural Grid for Dashed Placeholder Boxes */
+      .placeholder-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+      }
+
+      .span-4 {
+        grid-column: span 4;
+      }
+
+      .span-5 {
+        grid-column: span 5;
+      }
+
+      .span-6 {
+        grid-column: span 6;
+      }
+
+      .span-7 {
+        grid-column: span 7;
+      }
+
+      .span-8 {
+        grid-column: span 8;
+      }
+
+      .span-12 {
+        grid-column: span 12;
+      }
+
+      .placeholder-box {
+        border: 1.5px dashed var(--border-dashed-rose);
+        background-color: rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius-md);
+        padding: 28px;
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease,
+          transform 180ms var(--ease-editorial);
+      }
+
+      .placeholder-box.is-tall {
+        min-height: 280px;
+      }
+
+      .placeholder-box:hover {
+        border-color: var(--rose-accent);
+        background-color: var(--bg-surface);
+        transform: translateY(-2px);
+      }
+
+      .placeholder-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .placeholder-title {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-ink);
+      }
+
+      .placeholder-index {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--rose-accent);
+        flex-shrink: 0;
+      }
+
+      .placeholder-desc {
+        font-size: 14px;
+        color: var(--text-muted);
+        max-width: 48ch;
+      }
+
+      .placeholder-foot {
+        padding-top: 14px;
+        border-top: 1px dashed rgba(28, 25, 26, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      /* Mobile Bottom Tab Bar (hidden on desktop) */
+      .mobile-tabbar {
+        display: none;
+      }
+
+      /* =====================================================================
+         LOGIN SCREEN (#view-login)
+         ===================================================================== */
+      .login-view {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background-color: var(--bg-charcoal);
+        overflow: hidden;
+      }
+
+      .login-bg-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(35%) contrast(1.05);
+        transform: scale(1.03);
+      }
+
+      .login-bg-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          160deg,
+          rgba(20, 17, 18, 0.72) 0%,
+          rgba(24, 21, 22, 0.86) 100%
+        );
+      }
+
+      .login-card {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 440px;
+        background-color: var(--bg-canvas);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: var(--radius-lg);
+        padding: 44px 36px;
+        box-shadow: 0 28px 64px rgba(0, 0, 0, 0.42);
+      }
+
+      .login-brand {
+        font-family: var(--font-display);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text-ink);
+        text-align: center;
+      }
+
+      .login-tagline {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--rose-accent);
+        text-align: center;
+        margin-top: 6px;
+        margin-bottom: 32px;
+      }
+
+      .login-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .btn-google {
+        width: 100%;
+        padding: 13px 20px;
+        background-color: var(--bg-surface);
+        color: var(--text-ink);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease,
+          transform 180ms var(--ease-editorial);
+      }
+
+      .btn-google:hover {
+        border-color: var(--text-ink);
+        background-color: #ffffff;
+      }
+
+      .btn-guest {
+        width: 100%;
+      }
+
+      .login-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-block: 4px;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .login-divider::before,
+      .login-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background-color: var(--border-hairline);
+      }
+
+      .google-form-panel {
+        display: none;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 8px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .google-form-panel.is-open {
+        display: flex;
+      }
+
+      .login-footer-link {
+        margin-top: 24px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border-hairline);
+        text-align: center;
+      }
+
+      .text-link-btn {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .text-link-btn:hover {
+        color: var(--rose-accent);
+      }
+
+      /* =====================================================================
+         EVENT SETUP WIZARD (#view-wizard)
+         ===================================================================== */
+      .wizard-view {
+        min-height: 100vh;
+        background-color: var(--bg-canvas);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wizard-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 35;
+        background-color: rgba(250, 247, 245, 0.88);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .wizard-topbar-inner {
+        max-width: 860px;
+        margin-inline: auto;
+        padding: 16px 24px 14px;
+      }
+
+      .wizard-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .wizard-step-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--rose-accent);
+      }
+
+      .wizard-progress-track {
+        width: 100%;
+        height: 4px;
+        background-color: var(--bg-stone);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+      }
+
+      .wizard-progress-fill {
+        height: 100%;
+        width: 25%;
+        background-color: var(--rose-accent);
+        transition: width 320ms var(--ease-editorial);
+      }
+
+      .wizard-body {
+        flex: 1;
+        width: 100%;
+        max-width: 860px;
+        margin-inline: auto;
+        padding: 40px 24px 72px;
+      }
+
+      .wizard-card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-lg);
+        padding: 40px;
+      }
+
+      .wizard-step-panel {
+        display: none;
+      }
+
+      .wizard-step-panel.is-active {
+        display: block;
+        animation: panelFade 240ms var(--ease-editorial);
+      }
+
+      .wizard-step-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 2.8vw, 2.15rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-ink);
+        margin-bottom: 6px;
+      }
+
+      .wizard-step-sub {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 30px;
+      }
+
+      .form-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .field-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-ink);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .field-hint {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--text-muted);
+      }
+
+      .text-input,
+      .select-input,
+      .textarea-input {
+        width: 100%;
+        padding: 11px 14px;
+        font-size: 14px;
+        color: var(--text-ink);
+        background-color: var(--bg-canvas);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-sm);
+        transition: border-color 160ms ease, background-color 160ms ease;
+      }
+
+      .text-input:focus,
+      .select-input:focus,
+      .textarea-input:focus {
+        outline: none;
+        border-color: var(--rose-accent);
+        background-color: var(--bg-surface);
+      }
+
+      .textarea-input {
+        min-height: 92px;
+        resize: vertical;
+      }
+
+      /* Selectable Option Cards & Chips inside Wizard */
+      .choice-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .choice-cards-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .choice-card {
+        padding: 13px 14px;
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-sm);
+        background-color: var(--bg-canvas);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-ink);
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        transition:
+          border-color 160ms ease,
+          background-color 160ms ease,
+          color 160ms ease;
+      }
+
+      .choice-card:hover {
+        border-color: var(--rose-accent);
+      }
+
+      .choice-card.is-selected {
+        background-color: var(--rose-accent);
+        border-color: var(--rose-accent);
+        color: #ffffff;
+      }
+
+      .chip-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+
+      .wizard-chip {
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-hairline);
+        background-color: var(--bg-canvas);
+        color: var(--text-ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          border-color 160ms ease,
+          background-color 160ms ease,
+          color 160ms ease;
+      }
+
+      .wizard-chip:hover {
+        border-color: var(--rose-accent);
+      }
+
+      .wizard-chip.is-selected {
+        background-color: var(--bg-charcoal);
+        border-color: var(--bg-charcoal);
+        color: var(--text-on-dark);
+      }
+
+      .priority-rank-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: var(--radius-full);
+        background-color: var(--rose-accent);
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      /* Live Metrics & Range Slider */
+      .live-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 18px;
+        background-color: var(--rose-tint);
+        border: 1px solid rgba(154, 94, 97, 0.3);
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        color: var(--rose-accent-hover);
+      }
+
+      .live-banner strong {
+        font-family: var(--font-mono);
+        font-size: 15px;
+      }
+
+      .range-row {
+        display: grid;
+        grid-template-columns: 1fr 160px;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .range-slider {
+        width: 100%;
+        accent-color: var(--rose-accent);
+        height: 6px;
+        cursor: pointer;
+      }
+
+      .wizard-error {
+        font-size: 13px;
+        font-weight: 500;
+        color: #b91c1c;
+        min-height: 20px;
+        margin-top: 12px;
+      }
+
+      .wizard-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      /* Summary & SVG Donut Chart */
+      .summary-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 32px;
+        align-items: start;
+      }
+
+      .summary-dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 18px;
+        padding: 20px;
+        background-color: var(--bg-canvas);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+      }
+
+      .summary-item-full {
+        grid-column: span 2;
+      }
+
+      .summary-dt {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 2px;
+      }
+
+      .summary-dd {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-ink);
+        word-break: break-word;
+      }
+
+      .donut-card {
+        background-color: var(--bg-canvas);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        padding: 24px;
+      }
+
+      .donut-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+
+      .donut-head h3 {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .donut-svg-wrap {
+        position: relative;
+        width: 210px;
+        height: 210px;
+        margin: 0 auto 20px;
+      }
+
+      .donut-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .donut-center-label {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      .donut-center-val {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text-ink);
+      }
+
+      .donut-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .legend-row {
+        display: grid;
+        grid-template-columns: 12px 1fr auto auto;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid rgba(28, 25, 26, 0.06);
+      }
+
+      .legend-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .legend-swatch {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+      }
+
+      .legend-pct {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .legend-amt {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-ink);
+      }
+
+      .sidebar-user-meta {
+        padding: 10px 12px 12px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid var(--border-hairline-dark);
+      }
+
+      .sidebar-user-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-on-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .sidebar-user-email {
+        font-size: 11px;
+        color: var(--text-on-dark-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .topbar-event-title {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-ink);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 420px;
+      }
+
+      .topbar-event-meta {
+        font-size: 12px;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      @media (max-width: 720px) {
+        .wizard-card {
+          padding: 24px 18px;
+        }
+        .form-row-2,
+        .summary-layout {
+          grid-template-columns: 1fr;
+        }
+        .choice-cards-grid,
+        .choice-cards-grid.cols-3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .range-row {
+          grid-template-columns: 1fr;
+        }
+        .topbar-event-meta {
+          display: none;
+        }
+      }
+
+      /* =====================================================================
+         RESPONSIVE BREAKPOINTS
+         ===================================================================== */
+      @media (max-width: 1080px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+
+        .hero-visuals {
+          min-height: 360px;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .feature-card:nth-child(n) {
+          margin-top: 0;
+        }
+
+        .feature-card:nth-child(2n) {
+          margin-top: 24px;
+        }
+
+        .how-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .how-step:nth-child(2) {
+          border-right: none;
+        }
+
+        .how-step:nth-child(1),
+        .how-step:nth-child(2) {
+          border-bottom: 1px solid var(--border-hairline-dark);
+        }
+
+        .how-step:nth-child(3) {
+          padding-left: 0;
+        }
+
+        .pricing-grid,
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .testimonial-card:nth-child(2) {
+          margin-top: 0;
+        }
+
+        .interlude-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 860px) {
+        .header-nav {
+          display: none;
+        }
+
+        .header-actions .btn {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: inline-flex;
+        }
+
+        .cta-banner {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 40px 28px;
+        }
+
+        /* App Shell Mobile: Sidebar collapses to bottom tab bar */
+        .app-sidebar {
+          display: none;
+        }
+
+        .app-shell {
+          flex-direction: column;
+          padding-bottom: 72px;
+        }
+
+        .app-topbar {
+          padding-inline: 16px;
+          height: 60px;
+        }
+
+        .event-switcher {
+          font-size: 15px;
+          max-width: 175px;
+        }
+
+        .app-workspace {
+          padding: 24px 16px 32px;
+        }
+
+        .span-4,
+        .span-5,
+        .span-6,
+        .span-7,
+        .span-8 {
+          grid-column: span 12;
+        }
+
+        .mobile-tabbar {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 64px;
+          z-index: 45;
+          background-color: var(--bg-charcoal);
+          border-top: 1px solid var(--border-hairline-dark);
+        }
+
+        .mobile-tab-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          font-size: 10px;
+          font-weight: 500;
+          color: var(--text-on-dark-muted);
+          padding: 6px 2px;
+        }
+
+        .mobile-tab-btn svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .mobile-tab-btn.is-active {
+          color: var(--rose-soft);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .features-grid,
+        .how-strip,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-card:nth-child(n) {
+          margin-top: 0;
+        }
+
+        .how-step {
+          padding: 28px 0;
+          border-right: none;
+          border-bottom: 1px solid var(--border-hairline-dark);
+        }
+
+        .how-step:last-child {
+          border-bottom: none;
+        }
+
+        .hero-visuals {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-frame-side {
+          padding-top: 0;
+        }
+
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .editorial-frame img,
+        .feature-card,
+        .pricing-card,
+        .testimonial-card {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =====================================================================
+         LOGIN SCREEN (#view-login — Shown when no "userProfile" in localStorage)
+         ===================================================================== -->
+    <div id="view-login" class="login-view view-hidden">
+      <img
+        src="/src/assets/images/hero_celebration_courtyard_1795259572013.jpg"
+        alt=""
+        class="login-bg-img"
+        referrerpolicy="no-referrer"
+      />
+      <div class="login-bg-scrim" aria-hidden="true"></div>
+
+      <div class="login-card">
+        <h1 class="login-brand">Utsav AI</h1>
+        <p class="login-tagline">Your AI Event Planner</p>
+
+        <div class="login-actions" id="login-primary-actions">
+          <button type="button" class="btn-google" id="google-signin-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            <span>Sign in with Google</span>
+          </button>
+
+          <div class="login-divider"><span>or</span></div>
+
+          <button type="button" class="btn btn-secondary btn-guest" id="guest-signin-btn">
+            Continue as Guest
+          </button>
+        </div>
+
+        <form class="google-form-panel" id="google-signin-form" novalidate>
+          <div class="field-group">
+            <label for="google-name-input" class="field-label">Full Name</label>
+            <input
+              type="text"
+              id="google-name-input"
+              class="text-input"
+              placeholder="e.g. Aarav Sharma"
+              required
+            />
+          </div>
+          <div class="field-group">
+            <label for="google-email-input" class="field-label">Google Email</label>
+            <input
+              type="email"
+              id="google-email-input"
+              class="text-input"
+              placeholder="e.g. aarav@gmail.com"
+              required
+            />
+          </div>
+          <p class="wizard-error" id="login-error" style="margin-top:0;"></p>
+          <div style="display:flex;gap:10px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="google-cancel-btn" style="flex:1;">
+              Back
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm" style="flex:2;">
+              Continue
+            </button>
+          </div>
+        </form>
+
+        <div class="login-footer-link">
+          <button type="button" class="text-link-btn" id="login-explore-landing-btn">
+            Explore Utsav AI Overview
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         EVENT SETUP WIZARD (#view-wizard — Shown when no "eventProfile" or Editing)
+         ===================================================================== -->
+    <div id="view-wizard" class="wizard-view view-hidden">
+      <header class="wizard-topbar">
+        <div class="wizard-topbar-inner">
+          <div class="wizard-header-row">
+            <span class="brand-wordmark">Utsav AI</span>
+            <span class="wizard-step-label tabular-nums" id="wizard-progress-label">Step 1 of 4</span>
+          </div>
+          <div class="wizard-progress-track" aria-hidden="true">
+            <div class="wizard-progress-fill" id="wizard-progress-fill"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="wizard-body">
+        <div class="wizard-card">
+          <!-- STEP 1: THE EVENT -->
+          <section class="wizard-step-panel is-active" data-step="1">
+            <h1 class="wizard-step-title">The Event</h1>
+            <p class="wizard-step-sub">Tell Shubh what you are celebrating and who is hosting.</p>
+
+            <div class="form-stack">
+              <div class="field-group">
+                <span class="field-label">Event Type</span>
+                <div class="choice-cards-grid" id="wiz-event-type-grid">
+                  <button type="button" class="choice-card is-selected" data-value="Wedding">Wedding</button>
+                  <button type="button" class="choice-card" data-value="Engagement">Engagement</button>
+                  <button type="button" class="choice-card" data-value="Birthday">Birthday</button>
+                  <button type="button" class="choice-card" data-value="Anniversary">Anniversary</button>
+                  <button type="button" class="choice-card" data-value="Corporate Offsite">Corporate Offsite</button>
+                  <button type="button" class="choice-card" data-value="Baby Shower">Baby Shower</button>
+                  <button type="button" class="choice-card" data-value="Other">Other</button>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="wiz-event-name" class="field-label">Event Name</label>
+                  <input
+                    type="text"
+                    id="wiz-event-name"
+                    class="text-input"
+                    placeholder="e.g. Aarav &amp; Meera's Wedding"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="wiz-hosts" class="field-label">Host Names</label>
+                  <input
+                    type="text"
+                    id="wiz-hosts"
+                    class="text-input"
+                    placeholder="e.g. Rajesh &amp; Sunita Kapoor"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="wiz-days-count" class="field-label">Number of Days / Functions</label>
+                  <input
+                    type="number"
+                    id="wiz-days-count"
+                    class="text-input tabular-nums"
+                    min="1"
+                    max="14"
+                    value="3"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group" id="wiz-wedding-functions-group">
+                <span class="field-label">
+                  <span>Wedding Functions</span>
+                  <span class="field-hint">Select all ceremonies included</span>
+                </span>
+                <div class="chip-group" id="wiz-functions-chips">
+                  <button type="button" class="wizard-chip is-selected" data-value="Haldi">Haldi</button>
+                  <button type="button" class="wizard-chip is-selected" data-value="Mehendi">Mehendi</button>
+                  <button type="button" class="wizard-chip is-selected" data-value="Sangeet">Sangeet</button>
+                  <button type="button" class="wizard-chip is-selected" data-value="Wedding">Wedding</button>
+                  <button type="button" class="wizard-chip is-selected" data-value="Reception">Reception</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 2: WHEN & WHERE -->
+          <section class="wizard-step-panel" data-step="2">
+            <h1 class="wizard-step-title">When &amp; Where</h1>
+            <p class="wizard-step-sub">Anchor your timeline to a future date, city, and setting.</p>
+
+            <div class="form-stack">
+              <div class="form-row-2">
+                <div class="field-group">
+                  <label for="wiz-date" class="field-label">Event Date</label>
+                  <input type="date" id="wiz-date" class="text-input tabular-nums" />
+                </div>
+
+                <div class="field-group">
+                  <label for="wiz-city" class="field-label">City</label>
+                  <select id="wiz-city" class="select-input">
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Delhi NCR">Delhi NCR</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Udaipur" selected>Udaipur</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="live-banner" id="wiz-live-countdown-banner">
+                <span>Live Celebration Countdown</span>
+                <strong id="wiz-live-countdown">Select a future date</strong>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">Venue Type Preference</span>
+                <div class="choice-cards-grid cols-3" id="wiz-venue-grid">
+                  <button type="button" class="choice-card" data-value="Banquet Hall">Banquet Hall</button>
+                  <button type="button" class="choice-card" data-value="Hotel">Hotel</button>
+                  <button type="button" class="choice-card" data-value="Outdoor/Lawn">Outdoor/Lawn</button>
+                  <button type="button" class="choice-card" data-value="Beach">Beach</button>
+                  <button type="button" class="choice-card is-selected" data-value="Heritage Property">Heritage Property</button>
+                  <button type="button" class="choice-card" data-value="Home">Home</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 3: BUDGET & GUESTS -->
+          <section class="wizard-step-panel" data-step="3">
+            <h1 class="wizard-step-title">Budget &amp; Guests</h1>
+            <p class="wizard-step-sub">Set your INR capital ceiling and expected headcount.</p>
+
+            <div class="form-stack">
+              <div class="field-group">
+                <label for="wiz-budget-number" class="field-label">
+                  <span>Total Budget (INR)</span>
+                  <span class="field-hint tabular-nums" id="wiz-budget-formatted">Rs 25,00,000</span>
+                </label>
+                <div class="range-row">
+                  <input
+                    type="range"
+                    id="wiz-budget-slider"
+                    class="range-slider"
+                    min="50000"
+                    max="10000000"
+                    step="25000"
+                    value="2500000"
+                  />
+                  <input
+                    type="number"
+                    id="wiz-budget-number"
+                    class="text-input tabular-nums"
+                    min="50000"
+                    max="10000000"
+                    step="10000"
+                    value="2500000"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="wiz-guests-number" class="field-label">
+                  <span>Expected Guest Count</span>
+                  <span class="field-hint tabular-nums">10 to 2,000 guests</span>
+                </label>
+                <div class="range-row">
+                  <input
+                    type="range"
+                    id="wiz-guests-slider"
+                    class="range-slider"
+                    min="10"
+                    max="2000"
+                    step="10"
+                    value="200"
+                  />
+                  <input
+                    type="number"
+                    id="wiz-guests-number"
+                    class="text-input tabular-nums"
+                    min="10"
+                    max="2000"
+                    step="1"
+                    value="200"
+                  />
+                </div>
+              </div>
+
+              <div class="live-banner">
+                <span>Estimated Per-Guest Allocation</span>
+                <strong id="wiz-budget-per-guest">Budget per guest: Rs 12,500</strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 4: PREFERENCES -->
+          <section class="wizard-step-panel" data-step="4">
+            <h1 class="wizard-step-title">Preferences</h1>
+            <p class="wizard-step-sub">Fine-tune aesthetics, dining, and where Shubh should invest more.</p>
+
+            <div class="form-stack">
+              <div class="field-group">
+                <span class="field-label">
+                  <span>Celebration Style</span>
+                  <span class="field-hint">Select one or more</span>
+                </span>
+                <div class="chip-group" id="wiz-style-chips">
+                  <button type="button" class="wizard-chip is-selected" data-value="Traditional">Traditional</button>
+                  <button type="button" class="wizard-chip" data-value="Modern">Modern</button>
+                  <button type="button" class="wizard-chip" data-value="Minimal">Minimal</button>
+                  <button type="button" class="wizard-chip is-selected" data-value="Royal">Royal</button>
+                  <button type="button" class="wizard-chip" data-value="Boho">Boho</button>
+                  <button type="button" class="wizard-chip" data-value="Destination">Destination</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">Food Preference</span>
+                <div class="choice-cards-grid" id="wiz-food-grid">
+                  <button type="button" class="choice-card is-selected" data-value="Veg">Veg</button>
+                  <button type="button" class="choice-card" data-value="Non-veg">Non-veg</button>
+                  <button type="button" class="choice-card" data-value="Both">Both</button>
+                  <button type="button" class="choice-card" data-value="Jain">Jain</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">
+                  <span>Priority Ranking (Pick your Top 3)</span>
+                  <span class="field-hint tabular-nums" id="wiz-priority-counter">0 / 3 selected</span>
+                </span>
+                <div class="chip-group" id="wiz-priority-chips">
+                  <button type="button" class="wizard-chip" data-value="Venue">Venue</button>
+                  <button type="button" class="wizard-chip" data-value="Food">Food</button>
+                  <button type="button" class="wizard-chip" data-value="Decor">Decor</button>
+                  <button type="button" class="wizard-chip" data-value="Photography">Photography</button>
+                  <button type="button" class="wizard-chip" data-value="Entertainment">Entertainment</button>
+                  <button type="button" class="wizard-chip" data-value="Attire">Attire</button>
+                  <button type="button" class="wizard-chip" data-value="Guest Experience">Guest Experience</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="wiz-notes" class="field-label">Anything else Shubh should know?</label>
+                <textarea
+                  id="wiz-notes"
+                  class="textarea-input"
+                  placeholder="Optional: special rituals, accessibility needs, preferred floral palette, out-of-town guest logistics..."
+                ></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 5 (SUMMARY): PLAN SUMMARY & BUDGET SPLIT DONUT -->
+          <section class="wizard-step-panel" data-step="5">
+            <h1 class="wizard-step-title">Your Tailored Event Blueprint</h1>
+            <p class="wizard-step-sub">
+              Shubh adjusted your budget split by shifting +3% to each of your top 3 priorities.
+            </p>
+
+            <div class="summary-layout">
+              <dl class="summary-dl" id="wiz-summary-dl"></dl>
+
+              <div class="donut-card">
+                <div class="donut-head">
+                  <h3>Recommended Budget Split</h3>
+                  <span class="field-hint tabular-nums" id="donut-total-caption"></span>
+                </div>
+
+                <div class="donut-svg-wrap">
+                  <svg id="budget-donut-svg" viewBox="0 0 220 220" width="210" height="210" aria-label="Budget allocation donut chart"></svg>
+                  <div class="donut-center">
+                    <span class="donut-center-label">Total Budget</span>
+                    <span class="donut-center-val tabular-nums" id="donut-center-amount"></span>
+                  </div>
+                </div>
+
+                <div class="donut-legend" id="donut-legend"></div>
+              </div>
+            </div>
+          </section>
+
+          <p class="wizard-error" id="wizard-error" role="alert"></p>
+
+          <div class="wizard-nav-row">
+            <button type="button" class="btn btn-secondary" id="wiz-prev-btn">Back</button>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button type="button" class="btn btn-secondary view-hidden" id="wiz-cancel-edit-btn">Cancel</button>
+              <button type="button" class="btn btn-primary" id="wiz-next-btn">Next Step</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- =====================================================================
+         VIEW 1 — LANDING PAGE
+         ===================================================================== -->
+    <div id="view-landing" class="view-hidden">
+      <!-- Sticky Glassmorphism Navbar -->
+      <header class="site-header">
+        <div class="container header-inner">
+          <a href="#top" class="brand-wordmark">Utsav AI</a>
+
+          <nav class="header-nav" aria-label="Primary Navigation">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#stories">Stories</a>
+          </nav>
+
+          <div class="header-actions">
+            <button type="button" class="btn btn-primary btn-sm start-planning-btn">
+              Start Planning
+            </button>
+            <button
+              type="button"
+              class="mobile-menu-btn"
+              id="mobile-menu-toggle"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <line x1="4" y1="7" x2="20" y2="7"></line>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="17" x2="20" y2="17"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="mobile-drawer" id="mobile-drawer">
+          <a href="#features" class="mobile-nav-link">Features</a>
+          <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+          <a href="#pricing" class="mobile-nav-link">Pricing</a>
+          <a href="#stories" class="mobile-nav-link">Stories</a>
+          <button type="button" class="btn btn-primary btn-sm start-planning-btn">
+            Start Planning
+          </button>
+        </div>
+      </header>
+
+      <main id="top">
+        <!-- Full-Viewport Editorial Hero -->
+        <section class="hero-section">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <p class="hero-kicker">Intelligent Celebration Architecture</p>
+              <h1 class="hero-title">Plan Your Perfect Event with AI</h1>
+              <p class="hero-subtitle">
+                Enter your budget, guests and date. Shubh, your AI planner, handles the rest.
+              </p>
+
+              <div class="hero-ctas">
+                <button type="button" class="btn btn-primary start-planning-btn">
+                  Start Planning
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+                <a href="#how-it-works" class="btn btn-secondary">Explore How It Works</a>
+              </div>
+
+              <div class="hero-meta-strip">
+                <span><strong>14,200+</strong> celebrations structured</span>
+                <span aria-hidden="true">·</span>
+                <span><strong>Zero</strong> spreadsheet chaos</span>
+                <span aria-hidden="true">·</span>
+                <span><strong>Real-time</strong> replanning with Shubh</span>
+              </div>
+            </div>
+
+            <div class="hero-visuals">
+              <div class="editorial-frame hero-frame-main reveal">
+                <img
+                  src="/src/assets/images/hero_celebration_courtyard_1795259572013.jpg"
+                  alt="Candlelit sandstone palace courtyard dinner celebration with dusty rose florals"
+                  referrerpolicy="no-referrer"
+                  onerror="this.parentElement.classList.add('img-errored')"
+                />
+                <div class="img-fallback">
+                  <span>Heritage Courtyard Reception · Udaipur</span>
+                </div>
+              </div>
+
+              <div class="hero-frame-side">
+                <div class="editorial-frame hero-frame-portrait reveal">
+                  <img
+                    src="/src/assets/images/editorial_couple_portrait_1795259571716.jpg"
+                    alt="Couple in ivory and charcoal couture standing beneath a carved sandstone arch"
+                    referrerpolicy="no-referrer"
+                    onerror="this.parentElement.classList.add('img-errored')"
+                  />
+                  <div class="img-fallback">
+                    <span>Couple Portrait · Golden Hour</span>
+                  </div>
+                </div>
+                <p class="hero-caption">
+                  <strong>Three-Day Courtyard Celebration</strong>
+                  240 guests · 18 vendors coordinated · Replanned in 12 seconds after a monsoon venue shift.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6 Feature Cards (Staggered Editorial Grid) -->
+        <section id="features" class="section-pad">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="section-kicker">Core Capabilities</p>
+                <h2 class="section-title">Six engines working quietly behind every celebration</h2>
+              </div>
+              <p class="section-desc">
+                Built to replace scattered folders, group chats, and brittle spreadsheets with one disciplined planning workspace.
+              </p>
+            </div>
+
+            <div class="features-grid">
+              <article class="feature-card reveal">
+                <span class="feature-num">01</span>
+                <h3 class="feature-title">Smart Timeline</h3>
+                <p class="feature-text">
+                  Generates a realistic month-by-month roadmap anchored to your event date, cultural ceremonies, and vendor booking windows.
+                </p>
+                <div class="feature-meta">
+                  <span>Milestone Engine</span>
+                  <span class="tabular-nums">12-month horizon</span>
+                </div>
+              </article>
+
+              <article class="feature-card reveal">
+                <span class="feature-num">02</span>
+                <h3 class="feature-title">Vendor Matchmaker</h3>
+                <p class="feature-text">
+                  Pairs your aesthetic brief, city, and budget ceiling with vetted florists, caterers, and photographers—ready for shortlisting.
+                </p>
+                <div class="feature-meta">
+                  <span>Curated Directory</span>
+                  <span class="tabular-nums">Transparent rate cards</span>
+                </div>
+              </article>
+
+              <article class="feature-card reveal">
+                <span class="feature-num">03</span>
+                <h3 class="feature-title">RSVP Tracker</h3>
+                <p class="feature-text">
+                  Track household invitations, ceremony-level attendance, dietary notes, and hotel room blocks from a single live roster.
+                </p>
+                <div class="feature-meta">
+                  <span>Guest Logistics</span>
+                  <span class="tabular-nums">Household grouping</span>
+                </div>
+              </article>
+
+              <article class="feature-card reveal">
+                <span class="feature-num">04</span>
+                <h3 class="feature-title">Budget Guardian</h3>
+                <p class="feature-text">
+                  Allocates your capital across venues, hospitality, and decor with real-time variance warnings and milestone deposit tracking.
+                </p>
+                <div class="feature-meta">
+                  <span>Capital Control</span>
+                  <span class="tabular-nums">Payment schedule alerts</span>
+                </div>
+              </article>
+
+              <article class="feature-card reveal">
+                <span class="feature-num">05</span>
+                <h3 class="feature-title">Auto Reminders</h3>
+                <p class="feature-text">
+                  Automated nudges for tasting sessions, advance tranches, and family sign-offs ensure nothing slips through the cracks.
+                </p>
+                <div class="feature-meta">
+                  <span>Proactive Cadence</span>
+                  <span class="tabular-nums">Zero missed deadlines</span>
+                </div>
+              </article>
+
+              <article class="feature-card reveal">
+                <span class="feature-num">06</span>
+                <h3 class="feature-title">Instant Replanning</h3>
+                <p class="feature-text">
+                  Guest list jumped by 60 or a venue shifted dates? Shubh recalculates catering quotas, timelines, and vendor tasks on the spot.
+                </p>
+                <div class="feature-meta">
+                  <span>Adaptive AI</span>
+                  <span class="tabular-nums">Dependency-aware</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- Editorial Interlude -->
+            <div class="interlude-grid reveal">
+              <div class="editorial-frame interlude-frame">
+                <img
+                  src="/src/assets/images/editorial_table_setting_1795259571726.jpg"
+                  alt="Editorial wedding dining table with dusty rose floral centerpieces and raw linen"
+                  referrerpolicy="no-referrer"
+                  onerror="this.parentElement.classList.add('img-errored')"
+                />
+                <div class="img-fallback">
+                  <span>Bespoke Reception Table · Dusty Rose &amp; Linen</span>
+                </div>
+              </div>
+              <div class="interlude-copy">
+                <p class="section-kicker">Meet Shubh</p>
+                <h3>Calm, architectural precision from the first venue visit to the final toast</h3>
+                <p>
+                  Most planning tools stop at static checklists. Shubh understands how a single change—like adding an evening cocktail reception or adjusting per-plate catering—ripples across your entire budget and schedule.
+                </p>
+                <button type="button" class="btn btn-primary start-planning-btn">
+                  Open Shubh Workspace
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4-Step How-It-Works Strip + Event-Type Chips -->
+        <section id="how-it-works" class="how-band">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="section-kicker">How It Works</p>
+                <h2 class="section-title">Four steps from blank slate to confirmed itinerary</h2>
+              </div>
+              <p class="section-desc">
+                Start with three numbers—budget, guest count, and date. Utsav AI builds the operating system around them.
+              </p>
+            </div>
+
+            <div class="how-strip reveal">
+              <div class="how-step">
+                <span class="how-index">01</span>
+                <h3 class="how-title">Tell us your event</h3>
+                <p class="how-desc">
+                  Choose your celebration style, target date, city, guest estimate, and overall budget ceiling.
+                </p>
+              </div>
+              <div class="how-step">
+                <span class="how-index">02</span>
+                <h3 class="how-title">Get your plan</h3>
+                <p class="how-desc">
+                  Shubh structures your month-by-month timeline, category budget split, and curated vendor shortlist.
+                </p>
+              </div>
+              <div class="how-step">
+                <span class="how-index">03</span>
+                <h3 class="how-title">Track everything</h3>
+                <p class="how-desc">
+                  Monitor RSVPs, contract deposits, overdue tasks, and upcoming reminders from one unified console.
+                </p>
+              </div>
+              <div class="how-step">
+                <span class="how-index">04</span>
+                <h3 class="how-title">Shubh replans when life happens</h3>
+                <p class="how-desc">
+                  Shift dates, swap vendors, or resize your guest tier—Shubh updates downstream tasks immediately.
+                </p>
+              </div>
+            </div>
+
+            <!-- Event-Type Interactive Chips -->
+            <div class="event-types-wrap reveal">
+              <div class="event-types-header">
+                <span class="event-types-label">Select a celebration format to preview in the workspace</span>
+                <span class="event-types-brief" id="selected-event-brief">
+                  Wedding · Multi-day rituals, hospitality blocks &amp; vendor timelines
+                </span>
+              </div>
+
+              <div class="event-chips-row" role="group" aria-label="Event types">
+                <button
+                  type="button"
+                  class="event-chip is-active"
+                  data-event="Wedding"
+                  data-title="Ananya &amp; Rohan's Udaipur Wedding"
+                  data-days="142"
+                  data-brief="Wedding · Multi-day rituals, hospitality blocks &amp; vendor timelines"
+                >
+                  Wedding
+                </button>
+                <button
+                  type="button"
+                  class="event-chip"
+                  data-event="Engagement"
+                  data-title="Meera &amp; Dev's Engagement Soirée"
+                  data-days="64"
+                  data-brief="Engagement · Cocktail curation, ring ceremony timeline &amp; portrait brief"
+                >
+                  Engagement
+                </button>
+                <button
+                  type="button"
+                  class="event-chip"
+                  data-event="Birthday"
+                  data-title="Kavya's 30th Milestone Dinner"
+                  data-days="38"
+                  data-brief="Birthday · Private dining buyout, sound curation &amp; instant RSVP tracking"
+                >
+                  Birthday
+                </button>
+                <button
+                  type="button"
+                  class="event-chip"
+                  data-event="Anniversary"
+                  data-title="25th Silver Jubilee Celebration"
+                  data-days="91"
+                  data-brief="Anniversary · Family toast sequencing, archival decor &amp; tribute video cues"
+                >
+                  Anniversary
+                </button>
+                <button
+                  type="button"
+                  class="event-chip"
+                  data-event="Corporate Offsite"
+                  data-title="Autumn Leadership Offsite · Goa"
+                  data-days="52"
+                  data-brief="Corporate Offsite · Rooming lists, keynote AV runsheets &amp; invoice approvals"
+                >
+                  Corporate Offsite
+                </button>
+                <button
+                  type="button"
+                  class="event-chip"
+                  data-event="Baby Shower"
+                  data-title="Afternoon Garden Godh Bharai"
+                  data-days="29"
+                  data-brief="Baby Shower · Daytime floral styling, bespoke menu &amp; keepsake gifting"
+                >
+                  Baby Shower
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3-Tier Pricing -->
+        <section id="pricing" class="section-pad">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="section-kicker">Transparent Membership</p>
+                <h2 class="section-title">Structured tiers for every scale of gathering</h2>
+              </div>
+              <p class="section-desc">
+                Begin free for intimate gatherings, upgrade for multi-day celebrations, or run an entire planning studio.
+              </p>
+            </div>
+
+            <div class="pricing-grid">
+              <!-- Tier 1: Free -->
+              <article class="pricing-card reveal">
+                <h3 class="pricing-tier-name">Free</h3>
+                <p class="pricing-audience">For intimate single-day gatherings</p>
+
+                <div class="pricing-price">
+                  <span class="pricing-amount tabular-nums">$0</span>
+                  <span class="pricing-cadence">/ event</span>
+                </div>
+
+                <ul class="pricing-specs">
+                  <li>
+                    <span class="pricing-spec-label">Active Events</span>
+                    <span class="pricing-spec-val tabular-nums">1 Event</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Guest Capacity</span>
+                    <span class="pricing-spec-val tabular-nums">Up to 75 guests</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Smart Timeline &amp; Budget</span>
+                    <span class="pricing-spec-val">Included</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Shubh AI Replans</span>
+                    <span class="pricing-spec-val tabular-nums">10 / month</span>
+                  </li>
+                </ul>
+
+                <button type="button" class="btn btn-secondary start-planning-btn">
+                  Start Planning Free
+                </button>
+              </article>
+
+              <!-- Tier 2: Pro -->
+              <article class="pricing-card is-featured reveal">
+                <h3 class="pricing-tier-name">Pro</h3>
+                <p class="pricing-audience">For couples &amp; multi-day celebrations</p>
+
+                <div class="pricing-price">
+                  <span class="pricing-amount tabular-nums">$29</span>
+                  <span class="pricing-cadence">/ month</span>
+                </div>
+
+                <ul class="pricing-specs">
+                  <li>
+                    <span class="pricing-spec-label">Sub-Events &amp; Rituals</span>
+                    <span class="pricing-spec-val">Unlimited</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Guest Capacity</span>
+                    <span class="pricing-spec-val tabular-nums">Up to 600 guests</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Vendor Matchmaker</span>
+                    <span class="pricing-spec-val">Full Directory</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Shubh AI Replans</span>
+                    <span class="pricing-spec-val">Unlimited</span>
+                  </li>
+                </ul>
+
+                <button type="button" class="btn btn-primary start-planning-btn">
+                  Start Planning with Pro
+                </button>
+              </article>
+
+              <!-- Tier 3: Planner Studio -->
+              <article class="pricing-card reveal">
+                <h3 class="pricing-tier-name">Planner Studio</h3>
+                <p class="pricing-audience">For boutique agencies &amp; hospitality teams</p>
+
+                <div class="pricing-price">
+                  <span class="pricing-amount tabular-nums">$99</span>
+                  <span class="pricing-cadence">/ month</span>
+                </div>
+
+                <ul class="pricing-specs">
+                  <li>
+                    <span class="pricing-spec-label">Concurrent Client Events</span>
+                    <span class="pricing-spec-val tabular-nums">Up to 15 active</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Guest Capacity</span>
+                    <span class="pricing-spec-val">Unlimited</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Team Collaboration</span>
+                    <span class="pricing-spec-val tabular-nums">10 planner seats</span>
+                  </li>
+                  <li>
+                    <span class="pricing-spec-label">Custom Vendor Rate Cards</span>
+                    <span class="pricing-spec-val">Included</span>
+                  </li>
+                </ul>
+
+                <button type="button" class="btn btn-secondary start-planning-btn">
+                  Launch Planner Studio
+                </button>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 Testimonial Cards -->
+        <section id="stories" class="section-pad testimonials-section">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="section-kicker">Client Chronicles</p>
+                <h2 class="section-title">How hosts stayed composed under real-world pressure</h2>
+              </div>
+              <p class="section-desc">
+                Verified outcomes from couples, creative directors, and families who ran their celebrations through Utsav AI.
+              </p>
+            </div>
+
+            <div class="testimonials-grid">
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  “When our lakeside lawn flooded three weeks out, we panicked. Shubh rebuilt our entire three-day courtyard flow, resized floral orders, and sent updated vendor briefs before dinner that evening.”
+                </p>
+                <div class="testimonial-author">
+                  <div class="editorial-frame testimonial-avatar">
+                    <img
+                      src="/src/assets/images/testimonial_ananya_1795259572106.jpg"
+                      alt="Portrait of Ananya Deshmukh"
+                      referrerpolicy="no-referrer"
+                      onerror="this.parentElement.classList.add('img-errored')"
+                    />
+                    <div class="img-fallback">AD</div>
+                  </div>
+                  <div>
+                    <div class="testimonial-name">Ananya Deshmukh</div>
+                    <div class="testimonial-role">Bride · 320-Guest Jaipur Wedding</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  “We moved our 140-person leadership offsite off four spreadsheets into Utsav AI. Budget variance stayed under 1.8% and every AV vendor deposit cleared on schedule without manual chasing.”
+                </p>
+                <div class="testimonial-author">
+                  <div class="editorial-frame testimonial-avatar">
+                    <img
+                      src="/src/assets/images/testimonial_vikram_1795259572331.jpg"
+                      alt="Portrait of Vikramaditya Nair"
+                      referrerpolicy="no-referrer"
+                      onerror="this.parentElement.classList.add('img-errored')"
+                    />
+                    <div class="img-fallback">VN</div>
+                  </div>
+                  <div>
+                    <div class="testimonial-name">Vikramaditya Nair</div>
+                    <div class="testimonial-role">Creative Director · Annual Goa Offsite</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  “Coordinating 180 relatives across two continents usually takes months of phone calls. The RSVP household tracker and auto reminders gave us back our weekends leading up to the silver jubilee.”
+                </p>
+                <div class="testimonial-author">
+                  <div class="editorial-frame testimonial-avatar">
+                    <img
+                      src="/src/assets/images/editorial_couple_portrait_1795259571716.jpg"
+                      alt="Portrait of Meera and Kabir Sethi"
+                      referrerpolicy="no-referrer"
+                      onerror="this.parentElement.classList.add('img-errored')"
+                    />
+                    <div class="img-fallback">MS</div>
+                  </div>
+                  <div>
+                    <div class="testimonial-name">Meera &amp; Kabir Sethi</div>
+                    <div class="testimonial-role">Hosts · 25th Anniversary Gala</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="cta-banner-section">
+          <div class="container">
+            <div class="cta-banner reveal">
+              <div>
+                <h2 class="cta-banner-title">Replace spreadsheets with calm, deliberate planning.</h2>
+                <p class="cta-banner-sub">
+                  Step inside your Utsav AI workspace to organize timelines, vendors, RSVPs, and live replanning with Shubh.
+                </p>
+              </div>
+              <button type="button" class="btn btn-light start-planning-btn">
+                Start Planning
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- 4-Column Footer -->
+      <footer class="site-footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div>
+              <a href="#top" class="brand-wordmark">Utsav AI</a>
+              <p class="footer-brand-desc">
+                Editorial AI-powered event and wedding architecture. Built for hosts and studios who value clarity over clutter.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="footer-col-title">Platform</h4>
+              <ul class="footer-links">
+                <li><a href="#features">Smart Timeline</a></li>
+                <li><a href="#features">Vendor Matchmaker</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="footer-col-title">Celebrations</h4>
+              <ul class="footer-links">
+                <li><button type="button" class="footer-event-jump" data-event="Wedding">Weddings</button></li>
+                <li><button type="button" class="footer-event-jump" data-event="Engagement">Engagements</button></li>
+                <li><button type="button" class="footer-event-jump" data-event="Corporate Offsite">Corporate Offsites</button></li>
+                <li><button type="button" class="footer-event-jump" data-event="Anniversary">Milestone Galas</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="footer-col-title">Studio</h4>
+              <ul class="footer-links">
+                <li><a href="#stories">Client Stories</a></li>
+                <li><button type="button" class="start-planning-btn">Open Workspace</button></li>
+                <li><a href="mailto:concierge@utsav.ai">concierge@utsav.ai</a></li>
+                <li><span>Mumbai · New Delhi · Bengaluru</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span>&copy; 2026 Utsav AI. All rights reserved.</span>
+            <span>Privacy Policy · Terms of Service</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- =====================================================================
+         VIEW 2 — APP SHELL (Hidden by Default, Activated via "Start Planning")
+         ===================================================================== -->
+    <div id="view-app" class="app-shell view-hidden">
+      <!-- Left Sidebar Navigation (Desktop) -->
+      <aside class="app-sidebar" aria-label="Workspace Navigation">
+        <div>
+          <div class="sidebar-brand-row">
+            <span class="sidebar-wordmark">Utsav AI</span>
+          </div>
+
+          <nav class="sidebar-nav" role="tablist" aria-label="Workspace Sections">
+            <button type="button" class="sidebar-tab is-active" data-tab="dashboard" role="tab" aria-selected="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+                <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+                <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="timeline" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>Timeline</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="vendors" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Vendors</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="guests" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Guests</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="budget" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              <span>Budget</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="shubh" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Shubh AI</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-user-meta">
+            <div class="sidebar-user-name" id="sidebar-user-name">Guest Host</div>
+            <div class="sidebar-user-email" id="sidebar-user-email">guest@utsav.ai</div>
+          </div>
+          <button type="button" class="back-landing-btn" id="back-to-landing-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Overview</span>
+          </button>
+          <button type="button" class="back-landing-btn" id="sign-out-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- App Main Viewport -->
+      <div class="app-main">
+        <!-- Top Bar -->
+        <header class="app-topbar">
+          <div class="topbar-event-wrap">
+            <span class="topbar-event-title" id="app-event-title">My Celebration</span>
+            <span class="topbar-event-meta" id="app-event-meta"></span>
+          </div>
+
+          <div class="topbar-right">
+            <span class="countdown-pill tabular-nums" id="countdown-pill">D-0 to go</span>
+
+            <div class="bell-wrap">
+              <button
+                type="button"
+                class="bell-btn"
+                id="reminders-toggle"
+                aria-label="Toggle reminders"
+                aria-expanded="false"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="bell-count tabular-nums" id="bell-count">3</span>
+              </button>
+
+              <div class="reminders-popover is-hidden" id="reminders-popover" role="region" aria-label="Reminders">
+                <div class="reminders-head">
+                  <span>Auto Reminders</span>
+                  <span style="font-size: 12px; font-weight: 500; color: var(--text-muted);" id="reminders-summary">3 active</span>
+                </div>
+                <div id="reminders-list">
+                  <div class="reminder-item">
+                    <div>
+                      <div>Florist deposit tranche due</div>
+                      <div class="reminder-meta">Due in 4 days · Decor</div>
+                    </div>
+                    <button type="button" class="reminder-dismiss">Done</button>
+                  </div>
+                  <div class="reminder-item">
+                    <div>
+                      <div>Finalize Sangeet menu tasting</div>
+                      <div class="reminder-meta">Scheduled Friday · Catering</div>
+                    </div>
+                    <button type="button" class="reminder-dismiss">Done</button>
+                  </div>
+                  <div class="reminder-item">
+                    <div>
+                      <div>Confirm airport transfer manifest</div>
+                      <div class="reminder-meta">Due in 9 days · Guests</div>
+                    </div>
+                    <button type="button" class="reminder-dismiss">Done</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Active Tab Content -->
+        <main class="app-workspace">
+          <!-- TAB 1: DASHBOARD -->
+          <section id="panel-dashboard" class="tab-panel is-active" role="tabpanel">
+            <div class="panel-header">
+              <div>
+                <h1 class="panel-heading">Dashboard</h1>
+                <span class="panel-sub" id="dashboard-event-sub">Overview &amp; live event pulse</span>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" id="edit-event-btn">
+                Edit Event
+              </button>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-4">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Countdown</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  Day-by-day countdown clock calibrated to ceremony dates, rehearsal call times, and vendor load-in milestones.
+                </p>
+                <div class="placeholder-foot">
+                  <span id="dashboard-date-echo">Target Date</span>
+                  <span class="tabular-nums" id="dashboard-days-echo">D-0 to go</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box span-4">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Plan Health</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Readiness indicator across booked vendors, cleared payments, and timeline tasks completed ahead of schedule.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Readiness Telemetry</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box span-4">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Upcoming Tasks</h2>
+                  <span class="placeholder-index">03</span>
+                </div>
+                <p class="placeholder-desc">
+                  Next 14 days of prioritized actions assigned to hosts, family coordinators, and lead vendors.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Action Queue</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Budget Snapshot</h2>
+                  <span class="placeholder-index">04</span>
+                </div>
+                <p class="placeholder-desc">
+                  High-level comparison of allocated budget, committed contracts, paid deposits, and remaining reserve.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Financial Summary</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">RSVP Snapshot</h2>
+                  <span class="placeholder-index">05</span>
+                </div>
+                <p class="placeholder-desc">
+                  Confirmed, pending, and declined household tallies segmented by ceremony and accommodation tier.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Attendance Summary</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 2: TIMELINE -->
+          <section id="panel-timeline" class="tab-panel" role="tabpanel">
+            <div class="panel-header">
+              <h1 class="panel-heading">Timeline</h1>
+              <span class="panel-sub">Chronological milestones &amp; task execution</span>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box is-tall span-12">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Month-by-Month Timeline</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  Structured chronological roadmap mapping venue holds, invitation dispatches, tastings, and ceremony rehearsals.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Master Schedule</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-8">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Checklist</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Interactive deliverable checklist grouped by planning phase, owner, and vendor dependency.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Task Matrix</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-4">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Overdue Tasks</h2>
+                  <span class="placeholder-index">03</span>
+                </div>
+                <p class="placeholder-desc">
+                  Flagged items past their target completion window with one-click deadline rescheduling.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Attention Required</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 3: VENDORS -->
+          <section id="panel-vendors" class="tab-panel" role="tabpanel">
+            <div class="panel-header">
+              <h1 class="panel-heading">Vendors</h1>
+              <span class="panel-sub">Discovery, evaluation &amp; signed partners</span>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box is-tall span-12">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Suggested Vendors</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  AI-curated hospitality, floral, culinary, and photography partners filtered by city, availability, and aesthetic fit.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Matchmaker Feed</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Shortlist</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Side-by-side quote comparison, portfolio links, tasting notes, and contract terms under review.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Evaluation Board</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Booked</h2>
+                  <span class="placeholder-index">03</span>
+                </div>
+                <p class="placeholder-desc">
+                  Confirmed vendor roster with point-of-contact details, signed deliverables, and call-sheet status.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Confirmed Partners</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 4: GUESTS -->
+          <section id="panel-guests" class="tab-panel" role="tabpanel">
+            <div class="panel-header">
+              <h1 class="panel-heading">Guests</h1>
+              <span class="panel-sub">Households, RSVPs &amp; invitation dispatch</span>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box is-tall span-8">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Guest List</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  Searchable household directory with VIP tags, dietary restrictions, room assignments, and travel itineraries.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Household Roster</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-4">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">RSVP Summary</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Live breakdown of accepted, awaiting, and declined guests per ceremony or breakout session.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Response Breakdown</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box span-12">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Send Invites</h2>
+                  <span class="placeholder-index">03</span>
+                </div>
+                <p class="placeholder-desc">
+                  Digital save-the-dates, ceremony-specific RSVP links, and automated follow-up reminders for pending households.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Dispatch Studio</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 5: BUDGET -->
+          <section id="panel-budget" class="tab-panel" role="tabpanel">
+            <div class="panel-header">
+              <h1 class="panel-heading">Budget</h1>
+              <span class="panel-sub">Allocation, ledger &amp; payment milestones</span>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Budget Split</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  Category-level percentage allocation across venue, catering, decor, photography, hospitality, and contingency reserve.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Allocation Model</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-6">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Expenses</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Itemized expense ledger tracking quoted estimates against actual signed invoices and tax components.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Cost Ledger</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box span-12">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Payments Due</h2>
+                  <span class="placeholder-index">03</span>
+                </div>
+                <p class="placeholder-desc">
+                  Chronological calendar of upcoming vendor advances, mid-way installments, and final settlement dates.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Tranche Schedule</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 6: SHUBH AI -->
+          <section id="panel-shubh" class="tab-panel" role="tabpanel">
+            <div class="panel-header">
+              <h1 class="panel-heading">Shubh AI</h1>
+              <span class="panel-sub">Conversational planner &amp; instant replanning engine</span>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box is-tall span-7">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">Chat with Shubh</h2>
+                  <span class="placeholder-index">01</span>
+                </div>
+                <p class="placeholder-desc">
+                  Conversational AI planning desk to draft vendor briefs, estimate headcount shifts, and resolve scheduling conflicts.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Planner Dialogue</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+
+              <div class="placeholder-box is-tall span-5">
+                <div class="placeholder-top">
+                  <h2 class="placeholder-title">What Changed? Replan</h2>
+                  <span class="placeholder-index">02</span>
+                </div>
+                <p class="placeholder-desc">
+                  Simulate and apply cascading adjustments when your budget, guest tier, venue, or ceremony date changes.
+                </p>
+                <div class="placeholder-foot">
+                  <span>Scenario Recalculation</span>
+                  <span>Placeholder Slot</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- Mobile Bottom Tab Bar -->
+      <nav class="mobile-tabbar" aria-label="Mobile Workspace Navigation">
+        <button type="button" class="mobile-tab-btn is-active" data-tab="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+          </svg>
+          <span>Dash</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="timeline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Timeline</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="vendors">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span>Vendors</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="guests">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          <span>Guests</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="budget">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <span>Budget</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="shubh">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Shubh AI</span>
+        </button>
+      </nav>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const STORAGE_USER_KEY = "userProfile";
+        const STORAGE_EVENT_KEY = "eventProfile";
+
+        const BASE_SPLITS = {
+          Wedding: {
+            "Venue": 25,
+            "Catering": 30,
+            "Decor": 12,
+            "Photography": 8,
+            "Attire & Jewellery": 10,
+            "Entertainment": 5,
+            "Invitations & Gifts": 4,
+            "Contingency": 6
+          },
+          Engagement: {
+            "Venue": 24,
+            "Catering": 32,
+            "Decor": 14,
+            "Photography": 10,
+            "Attire & Jewellery": 8,
+            "Entertainment": 4,
+            "Invitations & Gifts": 3,
+            "Contingency": 5
+          },
+          Birthday: {
+            "Venue": 22,
+            "Catering": 34,
+            "Decor": 15,
+            "Photography": 8,
+            "Attire & Jewellery": 4,
+            "Entertainment": 9,
+            "Invitations & Gifts": 3,
+            "Contingency": 5
+          },
+          Anniversary: {
+            "Venue": 24,
+            "Catering": 32,
+            "Decor": 14,
+            "Photography": 9,
+            "Attire & Jewellery": 6,
+            "Entertainment": 7,
+            "Invitations & Gifts": 3,
+            "Contingency": 5
+          },
+          "Corporate Offsite": {
+            "Venue": 32,
+            "Catering": 28,
+            "Decor": 6,
+            "Photography": 5,
+            "Attire & Jewellery": 2,
+            "Entertainment": 14,
+            "Invitations & Gifts": 5,
+            "Contingency": 8
+          },
+          "Baby Shower": {
+            "Venue": 20,
+            "Catering": 32,
+            "Decor": 18,
+            "Photography": 10,
+            "Attire & Jewellery": 5,
+            "Entertainment": 4,
+            "Invitations & Gifts": 6,
+            "Contingency": 5
+          },
+          Other: {
+            "Venue": 25,
+            "Catering": 30,
+            "Decor": 12,
+            "Photography": 8,
+            "Attire & Jewellery": 6,
+            "Entertainment": 8,
+            "Invitations & Gifts": 5,
+            "Contingency": 6
+          }
+        };
+
+        const PRIORITY_TO_CATEGORY = {
+          "Venue": "Venue",
+          "Food": "Catering",
+          "Decor": "Decor",
+          "Photography": "Photography",
+          "Entertainment": "Entertainment",
+          "Attire": "Attire & Jewellery",
+          "Guest Experience": "Invitations & Gifts"
+        };
+
+        const DONUT_COLORS = [
+          "#9A5E61",
+          "#1C191A",
+          "#C68B8E",
+          "#5D5356",
+          "#D9A7A9",
+          "#8B7D80",
+          "#B38B7D",
+          "#CFC4C1"
+        ];
+
+        /* View Roots */
+        const viewLogin = document.getElementById("view-login");
+        const viewWizard = document.getElementById("view-wizard");
+        const viewLanding = document.getElementById("view-landing");
+        const viewApp = document.getElementById("view-app");
+
+        /* Login Elements */
+        const loginPrimaryActions = document.getElementById("login-primary-actions");
+        const googleSigninBtn = document.getElementById("google-signin-btn");
+        const guestSigninBtn = document.getElementById("guest-signin-btn");
+        const googleSigninForm = document.getElementById("google-signin-form");
+        const googleCancelBtn = document.getElementById("google-cancel-btn");
+        const googleNameInput = document.getElementById("google-name-input");
+        const googleEmailInput = document.getElementById("google-email-input");
+        const loginError = document.getElementById("login-error");
+        const loginExploreLandingBtn = document.getElementById("login-explore-landing-btn");
+
+        /* Landing Elements */
+        const startPlanningBtns = document.querySelectorAll(".start-planning-btn");
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileDrawer = document.getElementById("mobile-drawer");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+        const eventChips = document.querySelectorAll(".event-chip");
+        const footerEventJumps = document.querySelectorAll(".footer-event-jump");
+        const selectedEventBrief = document.getElementById("selected-event-brief");
+
+        /* Wizard Elements */
+        const wizardProgressLabel = document.getElementById("wizard-progress-label");
+        const wizardProgressFill = document.getElementById("wizard-progress-fill");
+        const wizardStepPanels = document.querySelectorAll(".wizard-step-panel");
+        const wizardError = document.getElementById("wizard-error");
+        const wizPrevBtn = document.getElementById("wiz-prev-btn");
+        const wizNextBtn = document.getElementById("wiz-next-btn");
+        const wizCancelEditBtn = document.getElementById("wiz-cancel-edit-btn");
+
+        const wizEventTypeGrid = document.getElementById("wiz-event-type-grid");
+        const wizEventName = document.getElementById("wiz-event-name");
+        const wizHosts = document.getElementById("wiz-hosts");
+        const wizDaysCount = document.getElementById("wiz-days-count");
+        const wizWeddingFunctionsGroup = document.getElementById("wiz-wedding-functions-group");
+        const wizFunctionsChips = document.getElementById("wiz-functions-chips");
+
+        const wizDate = document.getElementById("wiz-date");
+        const wizCity = document.getElementById("wiz-city");
+        const wizLiveCountdown = document.getElementById("wiz-live-countdown");
+        const wizVenueGrid = document.getElementById("wiz-venue-grid");
+
+        const wizBudgetSlider = document.getElementById("wiz-budget-slider");
+        const wizBudgetNumber = document.getElementById("wiz-budget-number");
+        const wizBudgetFormatted = document.getElementById("wiz-budget-formatted");
+        const wizGuestsSlider = document.getElementById("wiz-guests-slider");
+        const wizGuestsNumber = document.getElementById("wiz-guests-number");
+        const wizBudgetPerGuest = document.getElementById("wiz-budget-per-guest");
+
+        const wizStyleChips = document.getElementById("wiz-style-chips");
+        const wizFoodGrid = document.getElementById("wiz-food-grid");
+        const wizPriorityChips = document.getElementById("wiz-priority-chips");
+        const wizPriorityCounter = document.getElementById("wiz-priority-counter");
+        const wizNotes = document.getElementById("wiz-notes");
+
+        const wizSummaryDl = document.getElementById("wiz-summary-dl");
+        const donutSvg = document.getElementById("budget-donut-svg");
+        const donutCenterAmount = document.getElementById("donut-center-amount");
+        const donutTotalCaption = document.getElementById("donut-total-caption");
+        const donutLegend = document.getElementById("donut-legend");
+
+        /* App Shell Elements */
+        const sidebarUserName = document.getElementById("sidebar-user-name");
+        const sidebarUserEmail = document.getElementById("sidebar-user-email");
+        const backToLandingBtn = document.getElementById("back-to-landing-btn");
+        const signOutBtn = document.getElementById("sign-out-btn");
+        const editEventBtn = document.getElementById("edit-event-btn");
+
+        const appEventTitle = document.getElementById("app-event-title");
+        const appEventMeta = document.getElementById("app-event-meta");
+        const countdownPill = document.getElementById("countdown-pill");
+        const dashboardEventSub = document.getElementById("dashboard-event-sub");
+        const dashboardDateEcho = document.getElementById("dashboard-date-echo");
+        const dashboardDaysEcho = document.getElementById("dashboard-days-echo");
+
+        const sidebarTabs = document.querySelectorAll(".sidebar-tab");
+        const mobileTabs = document.querySelectorAll(".mobile-tab-btn");
+        const tabPanels = document.querySelectorAll(".tab-panel");
+
+        const remindersToggle = document.getElementById("reminders-toggle");
+        const remindersPopover = document.getElementById("reminders-popover");
+        const remindersList = document.getElementById("reminders-list");
+        const bellCount = document.getElementById("bell-count");
+        const remindersSummary = document.getElementById("reminders-summary");
+
+        /* State */
+        let currentStep = 1;
+        let isEditMode = false;
+        let selectedPriorities = [];
+        let calculatedSplit = {};
+        let calculatedPctMap = {};
+
+        /* Helpers */
+        function readStorage(key) {
+          try {
+            const raw = localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function writeStorage(key, val) {
+          localStorage.setItem(key, JSON.stringify(val));
+        }
+
+        function formatINR(num) {
+          return "Rs " + Math.round(Number(num) || 0).toLocaleString("en-IN");
+        }
+
+        function formatCompactINR(num) {
+          const n = Number(num) || 0;
+          if (n >= 10000000) return "Rs " + (n / 10000000).toFixed(2).replace(/\.00$/, "") + " Cr";
+          if (n >= 100000) return "Rs " + (n / 100000).toFixed(1).replace(/\.0$/, "") + " L";
+          return formatINR(n);
+        }
+
+        function getTomorrowISO() {
+          const d = new Date();
+          d.setDate(d.getDate() + 1);
+          const yyyy = d.getFullYear();
+          const mm = String(d.getMonth() + 1).padStart(2, "0");
+          const dd = String(d.getDate()).padStart(2, "0");
+          return yyyy + "-" + mm + "-" + dd;
+        }
+
+        function computeDaysToGo(dateStr) {
+          if (!dateStr) return null;
+          const parts = dateStr.split("-");
+          if (parts.length !== 3) return null;
+          const target = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+          const now = new Date();
+          const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          const diffMs = target.getTime() - todayMidnight.getTime();
+          return Math.ceil(diffMs / 86400000);
+        }
+
+        function showOnlyView(activeViewEl) {
+          [viewLogin, viewWizard, viewLanding, viewApp].forEach(function (v) {
+            v.classList.toggle("view-hidden", v !== activeViewEl);
+          });
+          if (mobileDrawer && mobileMenuToggle) {
+            mobileDrawer.classList.remove("is-open");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+          }
+          if (remindersPopover && remindersToggle) {
+            remindersPopover.classList.add("is-hidden");
+            remindersToggle.setAttribute("aria-expanded", "false");
+          }
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }
+
+        function routeFromStorage() {
+          const user = readStorage(STORAGE_USER_KEY);
+          const event = readStorage(STORAGE_EVENT_KEY);
+          if (!user) {
+            showOnlyView(viewLogin);
+            return;
+          }
+          if (!event) {
+            openWizard(false);
+            return;
+          }
+          hydrateAppShell(user, event);
+          showOnlyView(viewApp);
+        }
+
+        /* =====================================================================
+           LOGIN LOGIC
+           ===================================================================== */
+        googleSigninBtn.addEventListener("click", function () {
+          loginPrimaryActions.style.display = "none";
+          googleSigninForm.classList.add("is-open");
+          loginError.textContent = "";
+          googleNameInput.focus();
+        });
+
+        googleCancelBtn.addEventListener("click", function () {
+          googleSigninForm.classList.remove("is-open");
+          loginPrimaryActions.style.display = "flex";
+          loginError.textContent = "";
+        });
+
+        googleSigninForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = googleNameInput.value.trim();
+          const email = googleEmailInput.value.trim();
+          if (!name) {
+            loginError.textContent = "Please enter your name.";
+            return;
+          }
+          if (!email || email.indexOf("@") === -1) {
+            loginError.textContent = "Please enter a valid Google email address.";
+            return;
+          }
+          writeStorage(STORAGE_USER_KEY, { name: name, email: email });
+          googleSigninForm.reset();
+          googleSigninForm.classList.remove("is-open");
+          loginPrimaryActions.style.display = "flex";
+          routeFromStorage();
+        });
+
+        guestSigninBtn.addEventListener("click", function () {
+          writeStorage(STORAGE_USER_KEY, {
+            name: "Guest Host",
+            email: "guest@utsav.ai"
+          });
+          routeFromStorage();
+        });
+
+        loginExploreLandingBtn.addEventListener("click", function () {
+          showOnlyView(viewLanding);
+        });
+
+        /* =====================================================================
+           LANDING PAGE ACTIONS
+           ===================================================================== */
+        startPlanningBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            routeFromStorage();
+          });
+        });
+
+        if (mobileMenuToggle && mobileDrawer) {
+          mobileMenuToggle.addEventListener("click", function () {
+            const isOpen = mobileDrawer.classList.toggle("is-open");
+            mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+          });
+
+          mobileNavLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+              mobileDrawer.classList.remove("is-open");
+              mobileMenuToggle.setAttribute("aria-expanded", "false");
+            });
+          });
+        }
+
+        eventChips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            const type = chip.getAttribute("data-event");
+            eventChips.forEach(function (c) {
+              const isMatch = c === chip;
+              c.classList.toggle("is-active", isMatch);
+              if (isMatch && selectedEventBrief) {
+                selectedEventBrief.textContent = c.getAttribute("data-brief") || "";
+              }
+            });
+            if (type) {
+              setSingleCardSelection(wizEventTypeGrid, type);
+              toggleWeddingFunctions();
+            }
+          });
+        });
+
+        footerEventJumps.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const type = btn.getAttribute("data-event");
+            if (type) {
+              setSingleCardSelection(wizEventTypeGrid, type);
+              toggleWeddingFunctions();
+            }
+            routeFromStorage();
+          });
+        });
+
+        /* =====================================================================
+           WIZARD HELPERS & INTERACTIONS
+           ===================================================================== */
+        function setSingleCardSelection(container, value) {
+          const cards = container.querySelectorAll(".choice-card");
+          cards.forEach(function (card) {
+            card.classList.toggle("is-selected", card.getAttribute("data-value") === value);
+          });
+        }
+
+        function getSingleCardSelection(container) {
+          const active = container.querySelector(".choice-card.is-selected");
+          return active ? active.getAttribute("data-value") : "";
+        }
+
+        function getMultiChipValues(container) {
+          const list = [];
+          container.querySelectorAll(".wizard-chip.is-selected").forEach(function (chip) {
+            list.push(chip.getAttribute("data-value"));
+          });
+          return list;
+        }
+
+        function setMultiChipValues(container, values) {
+          const set = new Set(values || []);
+          container.querySelectorAll(".wizard-chip").forEach(function (chip) {
+            chip.classList.toggle("is-selected", set.has(chip.getAttribute("data-value")));
+          });
+        }
+
+        function toggleWeddingFunctions() {
+          const eventType = getSingleCardSelection(wizEventTypeGrid);
+          wizWeddingFunctionsGroup.style.display = eventType === "Wedding" ? "flex" : "none";
+        }
+
+        function wireSingleSelectGrid(container, onSelect) {
+          container.addEventListener("click", function (e) {
+            const card = e.target.closest(".choice-card");
+            if (!card) return;
+            setSingleCardSelection(container, card.getAttribute("data-value"));
+            if (onSelect) onSelect(card.getAttribute("data-value"));
+          });
+        }
+
+        function wireMultiSelectChips(container) {
+          container.addEventListener("click", function (e) {
+            const chip = e.target.closest(".wizard-chip");
+            if (!chip) return;
+            chip.classList.toggle("is-selected");
+          });
+        }
+
+        wireSingleSelectGrid(wizEventTypeGrid, function (val) {
+          toggleWeddingFunctions();
+          if (!isEditMode && wizDaysCount.value === "3" && val !== "Wedding") {
+            wizDaysCount.value = "1";
+          } else if (!isEditMode && wizDaysCount.value === "1" && val === "Wedding") {
+            wizDaysCount.value = "3";
+          }
+        });
+        wireMultiSelectChips(wizFunctionsChips);
+        wireSingleSelectGrid(wizVenueGrid);
+        wireMultiSelectChips(wizStyleChips);
+        wireSingleSelectGrid(wizFoodGrid);
+
+        /* Priority Ranking (Pick Top 3) */
+        function renderPriorityChips() {
+          wizPriorityChips.querySelectorAll(".wizard-chip").forEach(function (chip) {
+            const val = chip.getAttribute("data-value");
+            const idx = selectedPriorities.indexOf(val);
+            const existingBadge = chip.querySelector(".priority-rank-badge");
+            if (existingBadge) existingBadge.remove();
+
+            if (idx !== -1) {
+              chip.classList.add("is-selected");
+              const badge = document.createElement("span");
+              badge.className = "priority-rank-badge";
+              badge.textContent = String(idx + 1);
+              chip.prepend(badge);
+            } else {
+              chip.classList.remove("is-selected");
+            }
+          });
+          wizPriorityCounter.textContent = selectedPriorities.length + " / 3 selected";
+        }
+
+        wizPriorityChips.addEventListener("click", function (e) {
+          const chip = e.target.closest(".wizard-chip");
+          if (!chip) return;
+          const val = chip.getAttribute("data-value");
+          const idx = selectedPriorities.indexOf(val);
+          if (idx !== -1) {
+            selectedPriorities.splice(idx, 1);
+          } else {
+            if (selectedPriorities.length >= 3) {
+              selectedPriorities.shift();
+            }
+            selectedPriorities.push(val);
+          }
+          wizardError.textContent = "";
+          renderPriorityChips();
+        });
+
+        /* Live Date Countdown */
+        function updateLiveCountdownBanner() {
+          const days = computeDaysToGo(wizDate.value);
+          if (days === null || isNaN(days)) {
+            wizLiveCountdown.textContent = "Select a future date";
+            return;
+          }
+          if (days <= 0) {
+            wizLiveCountdown.textContent = "Please choose a future date";
+            return;
+          }
+          wizLiveCountdown.textContent = "D-" + days + " to go";
+        }
+
+        wizDate.min = getTomorrowISO();
+        wizDate.addEventListener("input", updateLiveCountdownBanner);
+        wizDate.addEventListener("change", updateLiveCountdownBanner);
+
+        /* Budget & Guests Sync */
+        function syncBudgetDisplay(source) {
+          let budget = Number(source === "slider" ? wizBudgetSlider.value : wizBudgetNumber.value);
+          if (isNaN(budget)) budget = 50000;
+          if (source === "number") {
+            const clamped = Math.min(10000000, Math.max(50000, budget));
+            wizBudgetSlider.value = String(clamped);
+          } else {
+            wizBudgetNumber.value = String(budget);
+          }
+          wizBudgetFormatted.textContent = formatINR(budget);
+          updateBudgetPerGuest();
+        }
+
+        function syncGuestsDisplay(source) {
+          let guests = Number(source === "slider" ? wizGuestsSlider.value : wizGuestsNumber.value);
+          if (isNaN(guests)) guests = 10;
+          if (source === "number") {
+            const clamped = Math.min(2000, Math.max(10, guests));
+            wizGuestsSlider.value = String(clamped);
+          } else {
+            wizGuestsNumber.value = String(guests);
+          }
+          updateBudgetPerGuest();
+        }
+
+        function updateBudgetPerGuest() {
+          const budget = Number(wizBudgetNumber.value) || 0;
+          const guests = Math.max(1, Number(wizGuestsNumber.value) || 1);
+          const perGuest = Math.round(budget / guests);
+          wizBudgetPerGuest.textContent = "Budget per guest: " + formatINR(perGuest);
+        }
+
+        wizBudgetSlider.addEventListener("input", function () {
+          syncBudgetDisplay("slider");
+        });
+        wizBudgetNumber.addEventListener("input", function () {
+          syncBudgetDisplay("number");
+        });
+        wizGuestsSlider.addEventListener("input", function () {
+          syncGuestsDisplay("slider");
+        });
+        wizGuestsNumber.addEventListener("input", function () {
+          syncGuestsDisplay("number");
+        });
+
+        /* Budget Split Calculation & SVG Donut Chart */
+        function calculateBudgetSplit(eventType, totalBudget, priorities) {
+          const base = BASE_SPLITS[eventType] || BASE_SPLITS.Other;
+          const pctMap = {};
+          const categories = Object.keys(base);
+          categories.forEach(function (cat) {
+            pctMap[cat] = base[cat];
+          });
+
+          const boostedCats = [];
+          (priorities || []).forEach(function (prio) {
+            const mapped = PRIORITY_TO_CATEGORY[prio];
+            if (mapped && pctMap[mapped] !== undefined && boostedCats.indexOf(mapped) === -1) {
+              boostedCats.push(mapped);
+            }
+          });
+
+          if (boostedCats.length > 0) {
+            const totalBoost = boostedCats.length * 3;
+            const nonBoosted = categories.filter(function (c) {
+              return boostedCats.indexOf(c) === -1;
+            });
+            const reductionEach = totalBoost / nonBoosted.length;
+
+            boostedCats.forEach(function (c) {
+              pctMap[c] = Number((pctMap[c] + 3).toFixed(2));
+            });
+            nonBoosted.forEach(function (c) {
+              pctMap[c] = Number((pctMap[c] - reductionEach).toFixed(2));
+            });
+          }
+
+          const amounts = {};
+          let runningSum = 0;
+          categories.forEach(function (cat, idx) {
+            if (idx < categories.length - 1) {
+              const amt = Math.round((totalBudget * pctMap[cat]) / 100);
+              amounts[cat] = amt;
+              runningSum += amt;
+            } else {
+              amounts[cat] = Math.max(0, totalBudget - runningSum);
+            }
+          });
+
+          return { pctMap: pctMap, amounts: amounts };
+        }
+
+        function renderSummaryAndDonut() {
+          const eventType = getSingleCardSelection(wizEventTypeGrid);
+          const eventName = wizEventName.value.trim();
+          const hosts = wizHosts.value.trim();
+          const daysCount = Number(wizDaysCount.value) || 1;
+          const functionsList =
+            eventType === "Wedding"
+              ? getMultiChipValues(wizFunctionsChips)
+              : [daysCount + (daysCount === 1 ? " Function" : " Functions")];
+          const dateVal = wizDate.value;
+          const daysToGo = computeDaysToGo(dateVal);
+          const city = wizCity.value;
+          const venueType = getSingleCardSelection(wizVenueGrid);
+          const budget = Math.min(10000000, Math.max(50000, Number(wizBudgetNumber.value) || 2500000));
+          const guestCount = Math.min(2000, Math.max(10, Number(wizGuestsNumber.value) || 200));
+          const styles = getMultiChipValues(wizStyleChips);
+          const food = getSingleCardSelection(wizFoodGrid);
+          const notes = wizNotes.value.trim();
+
+          const result = calculateBudgetSplit(eventType, budget, selectedPriorities);
+          calculatedSplit = result.amounts;
+          calculatedPctMap = result.pctMap;
+
+          function esc(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+          }
+
+          wizSummaryDl.innerHTML =
+            '<div><dt class="summary-dt">Event</dt><dd class="summary-dd">' + esc(eventName) + "</dd></div>" +
+            '<div><dt class="summary-dt">Type &amp; Hosts</dt><dd class="summary-dd">' + esc(eventType) + " · " + esc(hosts) + "</dd></div>" +
+            '<div><dt class="summary-dt">Date &amp; Countdown</dt><dd class="summary-dd tabular-nums">' + esc(dateVal) + " (D-" + daysToGo + " to go)</dd></div>" +
+            '<div><dt class="summary-dt">Location</dt><dd class="summary-dd">' + esc(city) + " · " + esc(venueType) + "</dd></div>" +
+            '<div><dt class="summary-dt">Budget &amp; Guests</dt><dd class="summary-dd tabular-nums">' + formatINR(budget) + " · " + guestCount + " guests</dd></div>" +
+            '<div><dt class="summary-dt">Food &amp; Style</dt><dd class="summary-dd">' + esc(food) + " · " + esc(styles.join(", ") || "Custom") + "</dd></div>" +
+            '<div class="summary-item-full"><dt class="summary-dt">Functions (' + daysCount + ' days)</dt><dd class="summary-dd">' + esc(functionsList.join(", ")) + "</dd></div>" +
+            '<div class="summary-item-full"><dt class="summary-dt">Top 3 Priorities (+3% each)</dt><dd class="summary-dd">' + esc(selectedPriorities.join(" · ")) + "</dd></div>" +
+            (notes
+              ? '<div class="summary-item-full"><dt class="summary-dt">Notes for Shubh</dt><dd class="summary-dd">' + esc(notes) + "</dd></div>"
+              : "");
+
+          donutCenterAmount.textContent = formatCompactINR(budget);
+          donutTotalCaption.textContent = formatINR(budget);
+
+          /* Pure SVG Donut Chart */
+          const radius = 82;
+          const circumference = 2 * Math.PI * radius;
+          let accumulatedPct = 0;
+          const categories = Object.keys(calculatedPctMap);
+
+          let svgMarkup =
+            '<circle cx="110" cy="110" r="' +
+            radius +
+            '" fill="none" stroke="#EDE5E2" stroke-width="26"></circle>';
+          let legendMarkup = "";
+
+          categories.forEach(function (cat, index) {
+            const pct = calculatedPctMap[cat];
+            const amt = calculatedSplit[cat];
+            const color = DONUT_COLORS[index % DONUT_COLORS.length];
+            const dashLength = (pct / 100) * circumference;
+            const dashOffset = -((accumulatedPct / 100) * circumference);
+            accumulatedPct += pct;
+
+            svgMarkup +=
+              '<circle cx="110" cy="110" r="' +
+              radius +
+              '" fill="none" stroke="' +
+              color +
+              '" stroke-width="26" stroke-dasharray="' +
+              dashLength.toFixed(2) +
+              " " +
+              circumference.toFixed(2) +
+              '" stroke-dashoffset="' +
+              dashOffset.toFixed(2) +
+              '" transform="rotate(-90 110 110)"></circle>';
+
+            legendMarkup +=
+              '<div class="legend-row">' +
+              '<span class="legend-swatch" style="background-color:' + color + '"></span>' +
+              "<span>" + esc(cat) + "</span>" +
+              '<span class="legend-pct tabular-nums">' + pct.toFixed(1).replace(/\.0$/, "") + "%</span>" +
+              '<span class="legend-amt tabular-nums">' + formatINR(amt) + "</span>" +
+              "</div>";
+          });
+
+          donutSvg.innerHTML = svgMarkup;
+          donutLegend.innerHTML = legendMarkup;
+        }
+
+        function setWizardStep(step) {
+          currentStep = step;
+          wizardError.textContent = "";
+
+          wizardStepPanels.forEach(function (panel) {
+            panel.classList.toggle("is-active", Number(panel.getAttribute("data-step")) === step);
+          });
+
+          if (step <= 4) {
+            wizardProgressLabel.textContent = "Step " + step + " of 4";
+            wizardProgressFill.style.width = step * 25 + "%";
+            wizPrevBtn.style.visibility = step === 1 ? "hidden" : "visible";
+            wizNextBtn.textContent = step === 4 ? "Finish & View Summary" : "Next Step";
+          } else {
+            wizardProgressLabel.textContent = "Summary & Budget Split";
+            wizardProgressFill.style.width = "100%";
+            wizPrevBtn.style.visibility = "visible";
+            wizNextBtn.textContent = "Generate My Plan";
+            renderSummaryAndDonut();
+          }
+        }
+
+        function validateCurrentStep() {
+          if (currentStep === 1) {
+            const eventType = getSingleCardSelection(wizEventTypeGrid);
+            if (!eventType) {
+              wizardError.textContent = "Please choose an event type.";
+              return false;
+            }
+            if (!wizEventName.value.trim()) {
+              wizardError.textContent = "Please enter an event name.";
+              wizEventName.focus();
+              return false;
+            }
+            if (!wizHosts.value.trim()) {
+              wizardError.textContent = "Please enter the host names.";
+              wizHosts.focus();
+              return false;
+            }
+            const daysVal = Number(wizDaysCount.value);
+            if (isNaN(daysVal) || daysVal < 1 || daysVal > 14) {
+              wizardError.textContent = "Please enter between 1 and 14 days/functions.";
+              return false;
+            }
+            if (eventType === "Wedding" && getMultiChipValues(wizFunctionsChips).length === 0) {
+              wizardError.textContent = "Please select at least one wedding function.";
+              return false;
+            }
+          }
+
+          if (currentStep === 2) {
+            const days = computeDaysToGo(wizDate.value);
+            if (!wizDate.value || days === null || days <= 0) {
+              wizardError.textContent = "Please choose an event date in the future.";
+              wizDate.focus();
+              return false;
+            }
+            if (!getSingleCardSelection(wizVenueGrid)) {
+              wizardError.textContent = "Please select a venue type preference.";
+              return false;
+            }
+          }
+
+          if (currentStep === 3) {
+            const budget = Number(wizBudgetNumber.value);
+            const guests = Number(wizGuestsNumber.value);
+            if (isNaN(budget) || budget < 50000 || budget > 10000000) {
+              wizardError.textContent = "Budget must be between Rs 50,000 and Rs 1,00,00,000 (1 crore).";
+              return false;
+            }
+            if (isNaN(guests) || guests < 10 || guests > 2000) {
+              wizardError.textContent = "Guest count must be between 10 and 2,000.";
+              return false;
+            }
+          }
+
+          if (currentStep === 4) {
+            if (getMultiChipValues(wizStyleChips).length === 0) {
+              wizardError.textContent = "Please select at least one celebration style.";
+              return false;
+            }
+            if (selectedPriorities.length !== 3) {
+              wizardError.textContent = "Please pick your top 3 priorities before finishing.";
+              return false;
+            }
+          }
+
+          return true;
+        }
+
+        wizPrevBtn.addEventListener("click", function () {
+          if (currentStep > 1) {
+            setWizardStep(currentStep - 1);
+          }
+        });
+
+        wizNextBtn.addEventListener("click", function () {
+          if (currentStep <= 4) {
+            if (!validateCurrentStep()) return;
+            setWizardStep(currentStep + 1);
+          } else {
+            const existing = readStorage(STORAGE_EVENT_KEY);
+            const eventType = getSingleCardSelection(wizEventTypeGrid);
+            const daysCount = Number(wizDaysCount.value) || 1;
+            const functionsList =
+              eventType === "Wedding"
+                ? getMultiChipValues(wizFunctionsChips)
+                : [daysCount + (daysCount === 1 ? " Function" : " Functions")];
+
+            const eventProfile = {
+              eventType: eventType,
+              eventName: wizEventName.value.trim(),
+              hosts: wizHosts.value.trim(),
+              functions: functionsList,
+              date: wizDate.value,
+              city: wizCity.value,
+              venueType: getSingleCardSelection(wizVenueGrid),
+              budget: Math.min(10000000, Math.max(50000, Number(wizBudgetNumber.value) || 2500000)),
+              guestCount: Math.min(2000, Math.max(10, Number(wizGuestsNumber.value) || 200)),
+              style: getMultiChipValues(wizStyleChips),
+              food: getSingleCardSelection(wizFoodGrid),
+              priorities: selectedPriorities.slice(),
+              notes: wizNotes.value.trim(),
+              budgetSplit: calculatedSplit,
+              createdAt: (existing && existing.createdAt) ? existing.createdAt : new Date().toISOString()
+            };
+
+            writeStorage(STORAGE_EVENT_KEY, eventProfile);
+            isEditMode = false;
+            const user = readStorage(STORAGE_USER_KEY) || { name: "Guest Host", email: "guest@utsav.ai" };
+            hydrateAppShell(user, eventProfile);
+            showOnlyView(viewApp);
+          }
+        });
+
+        wizCancelEditBtn.addEventListener("click", function () {
+          isEditMode = false;
+          routeFromStorage();
+        });
+
+        function openWizard(editExisting) {
+          isEditMode = Boolean(editExisting);
+          wizCancelEditBtn.classList.toggle("view-hidden", !isEditMode);
+          wizDate.min = getTomorrowISO();
+
+          const existing = readStorage(STORAGE_EVENT_KEY);
+          if (isEditMode && existing) {
+            setSingleCardSelection(wizEventTypeGrid, existing.eventType || "Wedding");
+            wizEventName.value = existing.eventName || "";
+            wizHosts.value = existing.hosts || "";
+            wizDaysCount.value = existing.eventType === "Wedding"
+              ? String((existing.functions && existing.functions.length) || 3)
+              : String(parseInt(existing.functions && existing.functions[0], 10) || 1);
+            if (existing.eventType === "Wedding") {
+              setMultiChipValues(wizFunctionsChips, existing.functions || []);
+            }
+            wizDate.value = existing.date || "";
+            wizCity.value = existing.city || "Udaipur";
+            setSingleCardSelection(wizVenueGrid, existing.venueType || "Heritage Property");
+            wizBudgetSlider.value = String(existing.budget || 2500000);
+            wizBudgetNumber.value = String(existing.budget || 2500000);
+            wizGuestsSlider.value = String(existing.guestCount || 200);
+            wizGuestsNumber.value = String(existing.guestCount || 200);
+            setMultiChipValues(wizStyleChips, existing.style || ["Traditional", "Royal"]);
+            setSingleCardSelection(wizFoodGrid, existing.food || "Veg");
+            selectedPriorities = Array.isArray(existing.priorities) ? existing.priorities.slice(0, 3) : [];
+            wizNotes.value = existing.notes || "";
+          } else {
+            wizEventName.value = "";
+            wizHosts.value = "";
+            wizDaysCount.value = getSingleCardSelection(wizEventTypeGrid) === "Wedding" ? "3" : "1";
+            setMultiChipValues(wizFunctionsChips, ["Haldi", "Mehendi", "Sangeet", "Wedding", "Reception"]);
+            const defaultFuture = new Date();
+            defaultFuture.setDate(defaultFuture.getDate() + 120);
+            const yyyy = defaultFuture.getFullYear();
+            const mm = String(defaultFuture.getMonth() + 1).padStart(2, "0");
+            const dd = String(defaultFuture.getDate()).padStart(2, "0");
+            wizDate.value = yyyy + "-" + mm + "-" + dd;
+            wizCity.value = "Udaipur";
+            setSingleCardSelection(wizVenueGrid, "Heritage Property");
+            wizBudgetSlider.value = "2500000";
+            wizBudgetNumber.value = "2500000";
+            wizGuestsSlider.value = "200";
+            wizGuestsNumber.value = "200";
+            setMultiChipValues(wizStyleChips, ["Traditional", "Royal"]);
+            setSingleCardSelection(wizFoodGrid, "Veg");
+            selectedPriorities = [];
+            wizNotes.value = "";
+          }
+
+          toggleWeddingFunctions();
+          updateLiveCountdownBanner();
+          syncBudgetDisplay("number");
+          syncGuestsDisplay("number");
+          renderPriorityChips();
+          setWizardStep(1);
+          showOnlyView(viewWizard);
+        }
+
+        /* =====================================================================
+           APP SHELL HYDRATION & INTERACTIONS
+           ===================================================================== */
+        function hydrateAppShell(user, event) {
+          sidebarUserName.textContent = user.name || "Guest Host";
+          sidebarUserEmail.textContent = user.email || "guest@utsav.ai";
+
+          appEventTitle.textContent = event.eventName || "My Celebration";
+          appEventMeta.textContent = (event.city || "") + " · " + (event.guestCount || 0) + " guests · " + formatCompactINR(event.budget || 0);
+
+          const days = computeDaysToGo(event.date);
+          const countdownText = days !== null && days >= 0 ? "D-" + days + " to go" : "Event Date";
+          countdownPill.textContent = countdownText;
+
+          if (dashboardEventSub) {
+            dashboardEventSub.textContent = event.eventType + " hosted by " + event.hosts + " · " + event.city;
+          }
+          if (dashboardDateEcho) {
+            dashboardDateEcho.textContent = event.date || "Target Date";
+          }
+          if (dashboardDaysEcho) {
+            dashboardDaysEcho.textContent = countdownText;
+          }
+        }
+
+        backToLandingBtn.addEventListener("click", function () {
+          showOnlyView(viewLanding);
+        });
+
+        signOutBtn.addEventListener("click", function () {
+          localStorage.removeItem(STORAGE_USER_KEY);
+          showOnlyView(viewLogin);
+        });
+
+        editEventBtn.addEventListener("click", function () {
+          openWizard(true);
+        });
+
+        /* App Shell Tab Switching (Single Tab Visible at a Time) */
+        function activateTab(tabId) {
+          sidebarTabs.forEach(function (tab) {
+            const active = tab.getAttribute("data-tab") === tabId;
+            tab.classList.toggle("is-active", active);
+            tab.setAttribute("aria-selected", String(active));
+          });
+
+          mobileTabs.forEach(function (tab) {
+            const active = tab.getAttribute("data-tab") === tabId;
+            tab.classList.toggle("is-active", active);
+          });
+
+          tabPanels.forEach(function (panel) {
+            const active = panel.id === "panel-" + tabId;
+            panel.classList.toggle("is-active", active);
+          });
+
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }
+
+        sidebarTabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            const tabId = tab.getAttribute("data-tab");
+            if (tabId) activateTab(tabId);
+          });
+        });
+
+        mobileTabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            const tabId = tab.getAttribute("data-tab");
+            if (tabId) activateTab(tabId);
+          });
+        });
+
+        /* Reminders Bell Popover */
+        remindersToggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const willOpen = remindersPopover.classList.contains("is-hidden");
+          remindersPopover.classList.toggle("is-hidden", !willOpen);
+          remindersToggle.setAttribute("aria-expanded", String(willOpen));
+        });
+
+        document.addEventListener("click", function (e) {
+          if (
+            !remindersPopover.classList.contains("is-hidden") &&
+            !remindersPopover.contains(e.target) &&
+            !remindersToggle.contains(e.target)
+          ) {
+            remindersPopover.classList.add("is-hidden");
+            remindersToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        remindersList.addEventListener("click", function (e) {
+          const dismissBtn = e.target.closest(".reminder-dismiss");
+          if (!dismissBtn) return;
+          const item = dismissBtn.closest(".reminder-item");
+          if (item) {
+            item.remove();
+            const remaining = remindersList.querySelectorAll(".reminder-item").length;
+            bellCount.textContent = String(remaining);
+            bellCount.style.display = remaining > 0 ? "block" : "none";
+            remindersSummary.textContent = remaining + " active";
+            if (remaining === 0) {
+              remindersList.innerHTML =
+                '<div style="font-size:13px;color:var(--text-muted);padding-block:8px;">All reminders cleared.</div>';
+            }
+          }
+        });
+
+        /* Scroll-Triggered Reveal Animations */
+        const revealEls = document.querySelectorAll(".reveal");
+        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (prefersReduced || !("IntersectionObserver" in window)) {
+          revealEls.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
+        } else {
+          const observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.14, rootMargin: "0px 0px -40px 0px" }
+          );
+
+          revealEls.forEach(function (el) {
+            observer.observe(el);
+          });
+        }
+
+        /* Initialize Flow from localStorage */
+        routeFromStorage();
+      })();
+    </script>
+  </body>
+</html>
